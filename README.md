@@ -234,17 +234,11 @@ npm run start
 
 ## 🔜 待开发功能
 
-- [ ] 用户资料编辑页面
-- [ ] 订阅购买和支付集成
+- [ ] 主页定制优化（高优先级）
+- [ ] 订阅购买和支付集成（高优先级）
 - [ ] 使用统计详情页面
-- [ ] 实时通知系统
-- [ ] 多语言支持 (i18n)
-- [ ] 深色/浅色主题切换
 
 ## 📄 相关仓库
-
-- **后端服务**: [meeting-assistant-api](https://github.com/Zhuoxi2000/meeting-assistant-api)
-- **macOS 客户端**: MeetingAssistant (Swift)
 
 ## 📜 许可证
 

@@ -24,11 +24,13 @@ declare module "next-auth" {
   }
 }
 
-declare module "next-auth/jwt" {
+declare module "@auth/core/jwt" {
   interface JWT {
     accessToken?: string;
     refreshToken?: string;
     tier?: string;
+    id?: string;
+    provider?: string;
   }
 }
 
@@ -101,25 +103,60 @@ export const authConfig: NextAuthConfig = {
     // 微信登录
     WeChatProvider,
     
-    // 邮箱密码登录 - 通过后端API验证
+    // 用户名密码登录 - 通过后端API验证
     Credentials({
-      name: "邮箱登录",
+      name: "用户名登录",
       credentials: {
-        email: { label: "邮箱", type: "email" },
+        username: { label: "用户名", type: "text" },
         password: { label: "密码", type: "password" },
       },
       async authorize(credentials) {
-        // TODO: 实现邮箱密码登录，调用后端API
-        // 目前仅支持微信登录
-        if (credentials?.email && credentials?.password) {
-          // 模拟用户验证（实际应调用后端API）
-          return {
-            id: "1",
-            name: "测试用户",
-            email: credentials.email as string,
-          };
+        if (!credentials?.username || !credentials?.password) {
+          return null;
         }
-        return null;
+
+        try {
+          // Call backend login API
+          const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: credentials.username,
+              password: credentials.password,
+            }),
+          });
+
+          if (!response.ok) {
+            const error = await response.json().catch(() => ({ detail: 'Login failed' }));
+            throw new Error(error.detail || 'Invalid username or password');
+          }
+
+          const tokens = await response.json();
+
+          // Get user info with the new access token
+          const userResponse = await fetch(`${API_BASE_URL}/auth/me`, {
+            headers: { 'Authorization': `Bearer ${tokens.access_token}` },
+          });
+
+          if (!userResponse.ok) {
+            throw new Error('Failed to get user info');
+          }
+
+          const userInfo = await userResponse.json();
+
+          return {
+            id: userInfo.id,
+            name: userInfo.nickname || userInfo.username,
+            email: userInfo.email,
+            image: userInfo.avatar_url,
+            accessToken: tokens.access_token,
+            refreshToken: tokens.refresh_token,
+            tier: userInfo.tier,
+          };
+        } catch (error) {
+          console.error('Login error:', error);
+          return null;
+        }
       },
     }),
   ],
@@ -144,6 +181,12 @@ export const authConfig: NextAuthConfig = {
         token.provider = "wechat";
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
+      }
+      
+      // 如果是用户名密码登录，token已经在authorize函数中设置
+      if (account?.provider === "credentials" && user) {
+        token.provider = "credentials";
+        // accessToken and refreshToken are already set from user object above
       }
       
       return token;

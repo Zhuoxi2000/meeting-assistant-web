@@ -2,16 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Section from "@/components/Section";
 import GlassCard from "@/components/GlassCard";
 import PrimaryButton from "@/components/PrimaryButton";
 import SecondaryButton from "@/components/SecondaryButton";
 import { 
-  User, Mail, Lock, LogIn, UserPlus, Eye, EyeOff, LogOut, 
+  User, Lock, LogIn, UserPlus, Eye, EyeOff, LogOut, 
   Settings, CreditCard, History, Copy, Check, RefreshCw,
-  Smartphone, Monitor
+  Smartphone, Monitor, Zap, Clock, Gift, ChevronRight,
+  Package, AlertCircle
 } from "lucide-react";
-import { apiClient, type DeviceClaimCodeResponse } from "@/lib/api";
+import { apiClient, type DeviceClaimCodeResponse, type QuotaResponse } from "@/lib/api";
 
 // 微信图标组件
 function WeChatIcon({ className }: { className?: string }) {
@@ -20,6 +22,49 @@ function WeChatIcon({ className }: { className?: string }) {
       <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.328.328 0 00.186-.059l1.807-1.003a.593.593 0 01.527-.058c1.06.348 2.216.549 3.422.549.225 0 .447-.009.667-.023-.168-.519-.257-1.065-.257-1.627 0-3.617 3.499-6.55 7.811-6.55.176 0 .349.008.521.018C16.737 4.97 13.022 2.188 8.691 2.188zm-2.24 3.802a1.087 1.087 0 11-.001 2.174 1.087 1.087 0 01.001-2.174zm5.108 0a1.087 1.087 0 110 2.174 1.087 1.087 0 010-2.174z"/>
       <path d="M23.982 14.841c0-3.231-3.12-5.852-6.97-5.852-3.848 0-6.97 2.621-6.97 5.852 0 3.232 3.122 5.853 6.97 5.853.742 0 1.458-.092 2.131-.259a.47.47 0 01.417.046l1.427.793a.26.26 0 00.147.047.232.232 0 00.23-.234c0-.058-.023-.113-.038-.168l-.308-1.17a.467.467 0 01.168-.527c1.426-1.067 2.796-2.685 2.796-4.381zm-9.463-.342a.862.862 0 11.002-1.724.862.862 0 01-.002 1.724zm4.986 0a.862.862 0 110-1.724.862.862 0 010 1.724z"/>
     </svg>
+  );
+}
+
+// Helper to format minutes
+function formatMinutes(minutes: number): string {
+  if (minutes >= 60) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return mins > 0 ? `${hours}h ${mins}m` : `${hours}h`;
+  }
+  return `${minutes}m`;
+}
+
+// Progress bar component
+function QuotaProgress({ 
+  used, 
+  total, 
+  label,
+  colorClass = "bg-[#6366F1]"
+}: { 
+  used: number; 
+  total: number; 
+  label: string;
+  colorClass?: string;
+}) {
+  const percentage = total > 0 ? Math.min(100, (used / total) * 100) : 0;
+  const remaining = total - used;
+  
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between text-sm">
+        <span className="text-[#AAB0C0]">{label}</span>
+        <span className="text-[#EDEFF7] font-medium">
+          {formatMinutes(remaining)} / {formatMinutes(total)}
+        </span>
+      </div>
+      <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+        <div 
+          className={`h-full rounded-full transition-all duration-500 ${colorClass}`}
+          style={{ width: `${100 - percentage}%` }}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -178,25 +223,223 @@ function DeviceClaimCodeCard() {
   );
 }
 
+// 订阅和额度卡片
+function SubscriptionCard() {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const [quota, setQuota] = useState<QuotaResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isActivatingTrial, setIsActivatingTrial] = useState(false);
+
+  useEffect(() => {
+    loadQuota();
+  }, [session]);
+
+  const loadQuota = async () => {
+    if (!session?.accessToken) return;
+
+    try {
+      apiClient.setAccessToken(session.accessToken);
+      const quotaData = await apiClient.getQuota();
+      setQuota(quotaData);
+    } catch (err) {
+      console.error("Failed to load quota:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const activateTrial = async () => {
+    if (!session?.accessToken) return;
+
+    setIsActivatingTrial(true);
+    try {
+      apiClient.setAccessToken(session.accessToken);
+      await apiClient.createTrialSubscription();
+      await loadQuota();
+    } catch (err) {
+      console.error("Failed to activate trial:", err);
+      alert(err instanceof Error ? err.message : "激活体验失败");
+    } finally {
+      setIsActivatingTrial(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <GlassCard>
+        <div className="animate-pulse space-y-4">
+          <div className="h-6 bg-white/10 rounded w-1/3"></div>
+          <div className="h-4 bg-white/10 rounded w-1/2"></div>
+          <div className="h-2 bg-white/10 rounded"></div>
+        </div>
+      </GlassCard>
+    );
+  }
+
+  // No subscription
+  if (!quota?.has_active_subscription) {
+    return (
+      <GlassCard>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1]">
+            <Package className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-[#EDEFF7]">我的套餐</h3>
+            <p className="text-sm text-[#AAB0C0]">暂无有效套餐</p>
+          </div>
+        </div>
+
+        <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 mb-4">
+          <div className="flex items-center gap-2 mb-2">
+            <Gift className="w-5 h-5 text-green-400" />
+            <span className="font-medium text-green-400">新用户专享</span>
+          </div>
+          <p className="text-sm text-[#AAB0C0]">
+            激活 7 天体验套餐，获得 30 分钟基础模型使用时间
+          </p>
+        </div>
+
+        <div className="flex gap-3">
+          <SecondaryButton
+            fullWidth
+            onClick={activateTrial}
+            disabled={isActivatingTrial}
+          >
+            {isActivatingTrial ? "激活中..." : "激活体验"}
+          </SecondaryButton>
+          <PrimaryButton
+            fullWidth
+            onClick={() => router.push("/pricing")}
+          >
+            购买套餐
+          </PrimaryButton>
+        </div>
+      </GlassCard>
+    );
+  }
+
+  // Has subscription
+  return (
+    <GlassCard>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1]">
+            <Zap className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-[#EDEFF7]">
+              {quota.package_name || "当前套餐"}
+            </h3>
+            {quota.earliest_expires_at ? (
+              <p className="text-sm text-[#AAB0C0]">
+                到期时间: {new Date(quota.earliest_expires_at).toLocaleDateString("zh-CN")}
+              </p>
+            ) : (
+              <p className="text-sm text-green-400">永久有效</p>
+            )}
+          </div>
+        </div>
+        <SecondaryButton onClick={() => router.push("/pricing")}>
+          续费
+        </SecondaryButton>
+      </div>
+
+      {/* Quota Progress */}
+      <div className="space-y-4">
+        <QuotaProgress
+          used={quota.basic_minutes_used}
+          total={quota.basic_minutes_total}
+          label="基础模型"
+          colorClass="bg-[#6366F1]"
+        />
+        <QuotaProgress
+          used={quota.premium_minutes_used}
+          total={quota.premium_minutes_total}
+          label="强模型"
+          colorClass="bg-purple-500"
+        />
+      </div>
+
+      {/* Warning if low quota */}
+      {(quota.basic_minutes_remaining < 10 || quota.premium_minutes_remaining < 5) && (
+        <div className="mt-4 p-3 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center gap-2">
+          <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+          <span className="text-sm text-yellow-400">
+            额度即将用完，建议及时续费
+          </span>
+        </div>
+      )}
+    </GlassCard>
+  );
+}
+
 // 未登录状态的登录表单
 function LoginForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleEmailLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     setIsLoading(true);
+
     try {
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/user",
-      });
-    } catch (error) {
-      console.error("登录失败:", error);
+      if (isLogin) {
+        // Login flow - use NextAuth credentials provider
+        const result = await signIn("credentials", {
+          username,
+          password,
+          redirect: false,
+        });
+
+        if (result?.error) {
+          setError("用户名或密码错误");
+        } else if (result?.ok) {
+          window.location.href = "/user";
+        }
+      } else {
+        // Registration flow - call API directly
+        if (password !== confirmPassword) {
+          setError("两次输入的密码不一致");
+          setIsLoading(false);
+          return;
+        }
+
+        if (password.length < 6) {
+          setError("密码长度至少为6位");
+          setIsLoading(false);
+          return;
+        }
+
+        // Register via API
+        await apiClient.register({
+          username,
+          password,
+          nickname: username,
+        });
+
+        // After successful registration, login
+        const result = await signIn("credentials", {
+          username,
+          password,
+          redirect: false,
+        });
+
+        if (result?.ok) {
+          window.location.href = "/user";
+        } else {
+          setError("注册成功，但登录失败，请重试");
+        }
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "操作失败，请重试");
     } finally {
       setIsLoading(false);
     }
@@ -211,6 +454,14 @@ function LoginForm() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Reset error when switching between login/register
+  const toggleMode = () => {
+    setIsLogin(!isLogin);
+    setError(null);
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
@@ -230,21 +481,29 @@ function LoginForm() {
 
       {/* Form */}
       <GlassCard>
-        <form onSubmit={handleEmailLogin} className="space-y-6">
-          {/* Email */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Error Message */}
+          {error && (
+            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Username */}
           <div>
             <label className="block text-sm font-medium text-[#EDEFF7] mb-2">
-              邮箱地址
+              用户名
             </label>
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0]" />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0]" />
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="请输入用户名"
                 className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] placeholder:text-[#AAB0C0]/50 focus:outline-none focus:border-[#6366F1]/50 transition-colors"
                 required
+                minLength={3}
               />
             </div>
           </div>
@@ -263,6 +522,7 @@ function LoginForm() {
                 placeholder="••••••••"
                 className="w-full h-12 pl-12 pr-12 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] placeholder:text-[#AAB0C0]/50 focus:outline-none focus:border-[#6366F1]/50 transition-colors"
                 required
+                minLength={6}
               />
               <button
                 type="button"
@@ -288,9 +548,12 @@ function LoginForm() {
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0]" />
                 <input
                   type={showPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
                   className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] placeholder:text-[#AAB0C0]/50 focus:outline-none focus:border-[#6366F1]/50 transition-colors"
                   required
+                  minLength={6}
                 />
               </div>
             </div>
@@ -355,21 +618,6 @@ function LoginForm() {
               <WeChatIcon className="w-6 h-6" />
               微信登录
             </button>
-
-            {/* Google 登录按钮 */}
-            <SecondaryButton 
-              fullWidth 
-              onClick={() => signIn("google", { callbackUrl: "/user" })}
-              disabled={isLoading}
-            >
-              <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"
-                />
-              </svg>
-              使用 Google 账号{isLogin ? "登录" : "注册"}
-            </SecondaryButton>
           </div>
         </form>
 
@@ -377,7 +625,7 @@ function LoginForm() {
         <div className="mt-6 text-center text-sm text-[#AAB0C0]">
           {isLogin ? "还没有账号？" : "已有账号？"}
           <button
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={toggleMode}
             className="ml-1 text-[#6366F1] hover:text-[#8B5CF6] font-medium transition-colors"
           >
             {isLogin ? "立即注册" : "立即登录"}
@@ -403,27 +651,33 @@ function LoginForm() {
 // 已登录状态的用户中心
 function UserDashboard() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const menuItems = [
-    { icon: <User className="w-5 h-5" />, label: "个人信息", description: "查看和编辑您的个人资料" },
-    { icon: <CreditCard className="w-5 h-5" />, label: "我的订阅", description: "管理您的套餐和付款方式" },
-    { icon: <History className="w-5 h-5" />, label: "使用记录", description: "查看您的面试辅导历史" },
-    { icon: <Settings className="w-5 h-5" />, label: "账号设置", description: "密码、通知和隐私设置" },
+    { 
+      icon: <CreditCard className="w-5 h-5" />, 
+      label: "我的订单", 
+      description: "查看订单和付款记录",
+      href: "/orders"
+    },
+    { 
+      icon: <History className="w-5 h-5" />, 
+      label: "使用记录", 
+      description: "查看您的面试辅导历史",
+      href: "#"
+    },
+    { 
+      icon: <Settings className="w-5 h-5" />, 
+      label: "账号设置", 
+      description: "密码、通知和隐私设置",
+      href: "#"
+    },
   ];
-
-  // Get tier display info
-  const tierInfo = {
-    free: { label: "免费版", color: "bg-gray-500/20 text-gray-400" },
-    pro: { label: "Pro 会员", color: "bg-[#6366F1]/20 text-[#6366F1]" },
-    enterprise: { label: "企业版", color: "bg-purple-500/20 text-purple-400" },
-  };
-
-  const currentTier = tierInfo[session?.user?.tier as keyof typeof tierInfo] || tierInfo.free;
 
   return (
     <div className="max-w-3xl mx-auto">
       {/* User Info Header */}
-      <GlassCard className="mb-8">
+      <GlassCard className="mb-6">
         <div className="flex flex-col sm:flex-row items-center gap-6">
           {/* Avatar */}
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] flex items-center justify-center text-white text-3xl font-bold overflow-hidden">
@@ -446,14 +700,6 @@ function UserDashboard() {
             <p className="text-[#AAB0C0] mb-3">
               {session?.user?.email || "未设置邮箱"}
             </p>
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-              <span className={`px-3 py-1 rounded-full text-xs font-medium ${currentTier.color}`}>
-                {currentTier.label}
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
-                已认证
-              </span>
-            </div>
           </div>
 
           {/* Logout Button */}
@@ -467,44 +713,35 @@ function UserDashboard() {
         </div>
       </GlassCard>
 
+      {/* Subscription Card */}
+      <SubscriptionCard />
+
       {/* Device Claim Code Card */}
       <DeviceClaimCodeCard />
 
       {/* Menu Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
         {menuItems.map((item, i) => (
           <GlassCard 
             key={i} 
             hover 
             className="cursor-pointer group"
+            onClick={() => item.href !== "#" && router.push(item.href)}
           >
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1] group-hover:bg-[#6366F1] group-hover:text-white transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1] group-hover:bg-[#6366F1] group-hover:text-white transition-colors">
                 {item.icon}
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-[#EDEFF7] mb-1">
+              <div className="flex-1">
+                <h3 className="text-sm font-semibold text-[#EDEFF7]">
                   {item.label}
                 </h3>
-                <p className="text-sm text-[#AAB0C0]">
+                <p className="text-xs text-[#AAB0C0]">
                   {item.description}
                 </p>
               </div>
+              <ChevronRight className="w-5 h-5 text-[#AAB0C0] group-hover:text-[#6366F1] transition-colors" />
             </div>
-          </GlassCard>
-        ))}
-      </div>
-
-      {/* Quick Stats */}
-      <div className="mt-8 grid grid-cols-3 gap-4">
-        {[
-          { label: "面试次数", value: "28" },
-          { label: "使用时长", value: "12h" },
-          { label: "剩余天数", value: "25" },
-        ].map((stat, i) => (
-          <GlassCard key={i} className="text-center">
-            <p className="text-3xl font-bold text-[#EDEFF7] mb-1">{stat.value}</p>
-            <p className="text-sm text-[#AAB0C0]">{stat.label}</p>
           </GlassCard>
         ))}
       </div>

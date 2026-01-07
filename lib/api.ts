@@ -23,6 +23,7 @@ interface DeviceClaimCodeResponse {
 
 interface UserResponse {
   id: string;
+  username: string | null;
   nickname: string | null;
   avatar_url: string | null;
   email: string | null;
@@ -30,13 +31,93 @@ interface UserResponse {
   created_at: string;
 }
 
+interface RegisterRequest {
+  username: string;
+  password: string;
+  nickname?: string;
+}
+
+interface LoginRequest {
+  username: string;
+  password: string;
+}
+
 interface EntitlementsResponse {
-  tier: 'free' | 'pro' | 'enterprise';
-  daily_requests_limit: number;
-  daily_requests_used: number;
-  monthly_tokens_limit: number;
-  monthly_tokens_used: number;
+  has_active_subscription: boolean;
+  package_id: string | null;
+  package_name: string | null;
+  basic_minutes_remaining: number;
+  premium_minutes_remaining: number;
+  expires_at: string | null;
   available_models: string[];
+}
+
+interface PackageResponse {
+  id: string;
+  name: string;
+  description: string | null;
+  price_cents: number;
+  basic_minutes: number;
+  premium_minutes: number;
+  validity_days: number;
+  sort_order: number;
+  is_active: boolean;
+  is_trial: boolean;
+}
+
+interface PackageListResponse {
+  packages: PackageResponse[];
+}
+
+interface SubscriptionResponse {
+  id: string;
+  package_id: string;
+  package_name: string | null;
+  basic_minutes_total: number;
+  basic_minutes_used: number;
+  basic_minutes_remaining: number;
+  premium_minutes_total: number;
+  premium_minutes_used: number;
+  premium_minutes_remaining: number;
+  started_at: string;
+  expires_at: string | null;
+  status: 'active' | 'expired' | 'cancelled';
+}
+
+interface QuotaResponse {
+  has_active_subscription: boolean;
+  package_id: string | null;
+  package_name: string | null;
+  basic_minutes_remaining: number;
+  premium_minutes_remaining: number;
+  basic_minutes_total: number;
+  premium_minutes_total: number;
+  basic_minutes_used: number;
+  premium_minutes_used: number;
+  earliest_expires_at: string | null;
+  available_models: string[];
+}
+
+interface OrderResponse {
+  id: string;
+  order_no: string;
+  package_id: string;
+  package_name: string | null;
+  amount_cents: number;
+  currency: string;
+  status: 'pending' | 'paid' | 'cancelled' | 'refunded' | 'failed';
+  payment_method: string | null;
+  created_at: string;
+  paid_at: string | null;
+  cancelled_at: string | null;
+  subscription_id: string | null;
+}
+
+interface PaymentResultResponse {
+  success: boolean;
+  order: OrderResponse;
+  subscription: SubscriptionResponse | null;
+  message: string;
 }
 
 class ApiClient {
@@ -80,6 +161,20 @@ class ApiClient {
   }
 
   // Auth endpoints
+  async register(data: RegisterRequest): Promise<TokenResponse> {
+    return this.request<TokenResponse>('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async login(data: LoginRequest): Promise<TokenResponse> {
+    return this.request<TokenResponse>('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
   async wechatCallback(code: string): Promise<TokenResponse> {
     return this.request<TokenResponse>('/auth/wechat/callback', {
       method: 'POST',
@@ -122,11 +217,68 @@ class ApiClient {
   }
 
   async getCurrentUser(): Promise<UserResponse> {
-    return this.request<UserResponse>('/me');
+    return this.request<UserResponse>('/auth/me');
   }
 
   async getEntitlements(): Promise<EntitlementsResponse> {
-    return this.request<EntitlementsResponse>('/entitlements');
+    return this.request<EntitlementsResponse>('/auth/entitlements');
+  }
+
+  // Package endpoints
+  async getPackages(): Promise<PackageListResponse> {
+    return this.request<PackageListResponse>('/packages');
+  }
+
+  async getPackage(packageId: string): Promise<PackageResponse> {
+    return this.request<PackageResponse>(`/packages/${packageId}`);
+  }
+
+  // Subscription endpoints
+  async getSubscriptions(): Promise<{ subscriptions: SubscriptionResponse[] }> {
+    return this.request('/subscription');
+  }
+
+  async getActiveSubscriptions(): Promise<{ subscriptions: SubscriptionResponse[] }> {
+    return this.request('/subscription/active');
+  }
+
+  async getQuota(): Promise<QuotaResponse> {
+    return this.request<QuotaResponse>('/subscription/quota');
+  }
+
+  async createTrialSubscription(): Promise<SubscriptionResponse> {
+    return this.request<SubscriptionResponse>('/subscription/trial', {
+      method: 'POST',
+    });
+  }
+
+  // Order endpoints
+  async createOrder(packageId: string): Promise<OrderResponse> {
+    return this.request<OrderResponse>('/orders', {
+      method: 'POST',
+      body: JSON.stringify({ package_id: packageId }),
+    });
+  }
+
+  async getOrders(): Promise<{ orders: OrderResponse[]; total: number }> {
+    return this.request('/orders');
+  }
+
+  async getOrder(orderId: string): Promise<OrderResponse> {
+    return this.request<OrderResponse>(`/orders/${orderId}`);
+  }
+
+  async payOrder(orderId: string, paymentMethod: string = 'mock'): Promise<PaymentResultResponse> {
+    return this.request<PaymentResultResponse>(`/orders/${orderId}/pay`, {
+      method: 'POST',
+      body: JSON.stringify({ payment_method: paymentMethod }),
+    });
+  }
+
+  async cancelOrder(orderId: string): Promise<OrderResponse> {
+    return this.request<OrderResponse>(`/orders/${orderId}/cancel`, {
+      method: 'POST',
+    });
   }
 
   // LLM endpoints
@@ -160,5 +312,13 @@ export type {
   DeviceClaimCodeResponse,
   UserResponse,
   EntitlementsResponse,
+  RegisterRequest,
+  LoginRequest,
+  PackageResponse,
+  PackageListResponse,
+  SubscriptionResponse,
+  QuotaResponse,
+  OrderResponse,
+  PaymentResultResponse,
 };
 

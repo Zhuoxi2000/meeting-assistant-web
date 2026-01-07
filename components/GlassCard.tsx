@@ -7,6 +7,7 @@ interface GlassCardProps {
   hover?: boolean;
   gradient?: boolean;
   padding?: "none" | "sm" | "md" | "lg";
+  onClick?: () => void;
 }
 
 export default function GlassCard({
@@ -15,6 +16,7 @@ export default function GlassCard({
   hover = false,
   gradient = false,
   padding = "md",
+  onClick,
 }: GlassCardProps) {
   const paddingClasses = {
     none: "",
@@ -32,6 +34,7 @@ export default function GlassCard({
         paddingClasses[padding],
         className
       )}
+      onClick={onClick}
     >
       {children}
     </div>

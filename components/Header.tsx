@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, User, Sparkles } from "lucide-react";
+import { Menu, X, User, Sparkles, Download, CreditCard, BookOpen, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { href: "/", label: "首页" },
-  { href: "/download", label: "客户端下载" },
-  { href: "/pricing", label: "购买套餐" },
-  { href: "/docs", label: "使用文档" },
+  { href: "/", label: "产品介绍", icon: <Home className="w-4 h-4" /> },
+  { href: "/download", label: "下载", icon: <Download className="w-4 h-4" /> },
+  { href: "/pricing", label: "定价", icon: <CreditCard className="w-4 h-4" /> },
+  { href: "/docs", label: "帮助", icon: <BookOpen className="w-4 h-4" /> },
 ];
 
 export default function Header() {
@@ -46,21 +46,22 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-4 py-2 text-sm text-[#94A3C8] hover:text-[#00D4FF] transition-colors duration-200 rounded-lg hover:bg-[#00D4FF]/5"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-[#94A3C8] hover:text-[#00D4FF] transition-colors duration-200 rounded-lg hover:bg-[#00D4FF]/5"
               >
+                {item.icon}
                 {item.label}
               </Link>
             ))}
           </div>
 
           {/* Right side - User Center button */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:flex items-center gap-3">
             <Link href="/user">
               <Button 
                 className="bg-gradient-to-r from-[#00D4FF] to-[#0066FF] hover:from-[#00B8E0] hover:to-[#0055DD] text-[#030712] rounded-full px-6 h-10 font-semibold btn-glow transition-all duration-300 shadow-lg shadow-[#00D4FF]/20"
               >
                 <User className="w-4 h-4 mr-2" />
-                用户中心
+                登录
               </Button>
             </Link>
           </div>
@@ -87,9 +88,10 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-4 py-3 text-[#94A3C8] hover:text-[#00D4FF] hover:bg-[#00D4FF]/5 rounded-xl transition-all duration-200"
+                className="flex items-center gap-3 px-4 py-3 text-[#94A3C8] hover:text-[#00D4FF] hover:bg-[#00D4FF]/5 rounded-xl transition-all duration-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
+                {item.icon}
                 {item.label}
               </Link>
             ))}
@@ -99,7 +101,7 @@ export default function Header() {
                   className="w-full bg-gradient-to-r from-[#00D4FF] to-[#0066FF] hover:from-[#00B8E0] hover:to-[#0055DD] text-[#030712] rounded-full h-11 font-semibold shadow-lg shadow-[#00D4FF]/20"
                 >
                   <User className="w-4 h-4 mr-2" />
-                  用户中心
+                  登录
                 </Button>
               </Link>
             </div>

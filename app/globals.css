@@ -543,6 +543,24 @@
   }
 }
 
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-slow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 @layer utilities {
   .animate-shimmer {
     animation: shimmer 3s linear infinite;
@@ -599,6 +617,19 @@
   
   .animation-delay-800 {
     animation-delay: 800ms;
+  }
+  
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+  
+  .animate-scroll-slow {
+    animation: scroll-slow 40s linear infinite;
+  }
+  
+  .animate-scroll:hover,
+  .animate-scroll-slow:hover {
+    animation-play-state: paused;
   }
 }
 

@@ -22,7 +22,7 @@ function StatusBadge({ status }: { status: string }) {
     },
     paid: { 
       label: "已支付", 
-      color: "bg-green-500/20 text-green-400 border-green-500/30",
+      color: "bg-[#00FF88]/20 text-[#00FF88] border-[#00FF88]/30",
       icon: <CheckCircle className="w-3.5 h-3.5" />
     },
     cancelled: { 
@@ -32,7 +32,7 @@ function StatusBadge({ status }: { status: string }) {
     },
     refunded: { 
       label: "已退款", 
-      color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+      color: "bg-[#00D4FF]/20 text-[#00D4FF] border-[#00D4FF]/30",
       icon: <RefreshCw className="w-3.5 h-3.5" />
     },
     failed: { 
@@ -107,8 +107,8 @@ export default function OrdersPage() {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 rounded-full border-4 border-[#6366F1] border-t-transparent animate-spin mx-auto mb-4" />
-          <p className="text-[#AAB0C0]">加载中...</p>
+          <div className="w-12 h-12 rounded-full border-4 border-[#00D4FF] border-t-transparent animate-spin mx-auto mb-4" />
+          <p className="text-[#94A3C8]">加载中...</p>
         </div>
       </div>
     );
@@ -122,11 +122,11 @@ export default function OrdersPage() {
           <div className="flex items-center gap-4 mb-8">
             <button
               onClick={() => router.push("/user")}
-              className="p-2 rounded-lg hover:bg-white/[0.05] transition-colors"
+              className="p-2 rounded-lg hover:bg-[#00D4FF]/10 transition-colors"
             >
-              <ArrowLeft className="w-6 h-6 text-[#AAB0C0]" />
+              <ArrowLeft className="w-6 h-6 text-[#94A3C8]" />
             </button>
-            <h1 className="text-2xl font-bold text-[#EDEFF7]">我的订单</h1>
+            <h1 className="text-2xl font-bold text-[#F0F4FF]">我的订单</h1>
           </div>
 
           {error && (
@@ -140,11 +140,11 @@ export default function OrdersPage() {
 
           {orders.length === 0 ? (
             <GlassCard className="text-center py-16">
-              <div className="w-16 h-16 rounded-full bg-white/[0.05] flex items-center justify-center mx-auto mb-4">
-                <Package className="w-8 h-8 text-[#AAB0C0]" />
+              <div className="w-16 h-16 rounded-full bg-[#00D4FF]/10 flex items-center justify-center mx-auto mb-4">
+                <Package className="w-8 h-8 text-[#00D4FF]" />
               </div>
-              <h3 className="text-lg font-medium text-[#EDEFF7] mb-2">暂无订单</h3>
-              <p className="text-[#AAB0C0] mb-6">您还没有购买任何套餐</p>
+              <h3 className="text-lg font-medium text-[#F0F4FF] mb-2">暂无订单</h3>
+              <p className="text-[#94A3C8] mb-6">您还没有购买任何套餐</p>
               <SecondaryButton onClick={() => router.push("/pricing")}>
                 查看套餐
               </SecondaryButton>
@@ -157,13 +157,13 @@ export default function OrdersPage() {
                     {/* Order Info */}
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold text-[#EDEFF7]">
+                        <h3 className="text-lg font-semibold text-[#F0F4FF]">
                           {order.package_name}
                         </h3>
                         <StatusBadge status={order.status} />
                       </div>
-                      <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#AAB0C0]">
-                        <span>订单号: <span className="font-mono">{order.order_no}</span></span>
+                      <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-[#94A3C8]">
+                        <span>订单号: <span className="font-mono text-[#00D4FF]">{order.order_no}</span></span>
                         <span>创建时间: {formatDate(order.created_at)}</span>
                         {order.paid_at && (
                           <span>支付时间: {formatDate(order.paid_at)}</span>
@@ -174,11 +174,11 @@ export default function OrdersPage() {
                     {/* Price & Actions */}
                     <div className="flex items-center gap-4">
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-[#EDEFF7]">
+                        <p className="text-2xl font-bold text-[#F0F4FF]">
                           ¥{(order.amount_cents / 100).toFixed(0)}
                         </p>
                         {order.payment_method && (
-                          <p className="text-xs text-[#AAB0C0]">
+                          <p className="text-xs text-[#94A3C8]">
                             {order.payment_method === "mock" ? "模拟支付" : order.payment_method}
                           </p>
                         )}
@@ -202,8 +202,3 @@ export default function OrdersPage() {
     </div>
   );
 }
-
-
-
-
-

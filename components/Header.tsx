@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
@@ -17,20 +17,27 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Glass background */}
+      {/* Glass background with subtle grid */}
       <div className="absolute inset-0 glass-card" />
       
       <nav className="relative container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            {/* Logo icon - gradient square */}
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] flex items-center justify-center shadow-lg group-hover:shadow-[#6366F1]/30 transition-shadow duration-300">
-              <span className="text-white font-bold text-lg">智</span>
+            {/* Logo icon - Tech gradient with glow */}
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D4FF] via-[#0066FF] to-[#00FF88] flex items-center justify-center shadow-lg group-hover:shadow-[#00D4FF]/40 transition-all duration-300">
+              {/* Inner glow effect */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent" />
+              <Sparkles className="w-5 h-5 text-[#030712] relative z-10" />
             </div>
-            <span className="text-lg font-semibold text-[#EDEFF7] hidden sm:block">
-              AI智语面试
-            </span>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-[#F0F4FF] tracking-tight hidden sm:block">
+                智谈<span className="text-[#00D4FF]">AI</span>
+              </span>
+              <span className="text-[10px] text-[#94A3C8] hidden sm:block tracking-wider">
+                AI INTERVIEW ASSISTANT
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -39,7 +46,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-4 py-2 text-sm text-[#AAB0C0] hover:text-[#EDEFF7] transition-colors duration-200 rounded-lg hover:bg-white/5"
+                className="px-4 py-2 text-sm text-[#94A3C8] hover:text-[#00D4FF] transition-colors duration-200 rounded-lg hover:bg-[#00D4FF]/5"
               >
                 {item.label}
               </Link>
@@ -50,7 +57,7 @@ export default function Header() {
           <div className="hidden md:flex items-center">
             <Link href="/user">
               <Button 
-                className="bg-[#6366F1] hover:bg-[#5558E8] text-white rounded-full px-6 h-10 font-medium btn-glow transition-all duration-300"
+                className="bg-gradient-to-r from-[#00D4FF] to-[#0066FF] hover:from-[#00B8E0] hover:to-[#0055DD] text-[#030712] rounded-full px-6 h-10 font-semibold btn-glow transition-all duration-300 shadow-lg shadow-[#00D4FF]/20"
               >
                 <User className="w-4 h-4 mr-2" />
                 用户中心
@@ -60,7 +67,7 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 text-[#AAB0C0] hover:text-[#EDEFF7] transition-colors"
+            className="md:hidden p-2 text-[#94A3C8] hover:text-[#00D4FF] transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -80,7 +87,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-4 py-3 text-[#AAB0C0] hover:text-[#EDEFF7] hover:bg-white/5 rounded-xl transition-all duration-200"
+                className="block px-4 py-3 text-[#94A3C8] hover:text-[#00D4FF] hover:bg-[#00D4FF]/5 rounded-xl transition-all duration-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
@@ -89,7 +96,7 @@ export default function Header() {
             <div className="pt-2 px-4">
               <Link href="/user" onClick={() => setMobileMenuOpen(false)}>
                 <Button 
-                  className="w-full bg-[#6366F1] hover:bg-[#5558E8] text-white rounded-full h-11 font-medium"
+                  className="w-full bg-gradient-to-r from-[#00D4FF] to-[#0066FF] hover:from-[#00B8E0] hover:to-[#0055DD] text-[#030712] rounded-full h-11 font-semibold shadow-lg shadow-[#00D4FF]/20"
                 >
                   <User className="w-4 h-4 mr-2" />
                   用户中心
@@ -102,4 +109,3 @@ export default function Header() {
     </header>
   );
 }
-

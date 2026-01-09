@@ -8,8 +8,9 @@
    ======================== */
 @theme inline {
   /* Fonts */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-outfit);
+  --font-mono: var(--font-jetbrains);
   
   /* Colors */
   --color-background: var(--background);
@@ -59,71 +60,77 @@
 }
 
 /* ========================
-   Dark Theme Variables (Default)
+   Dark Theme Variables (Default) - 智谈AI 科技蓝青配色
    ======================== */
 :root {
   --radius: 1rem;
   
-  /* Base colors - Dark theme */
-  --background: #050505;
-  --foreground: #EDEFF7;
+  /* Base colors - Deep tech dark theme */
+  --background: #030712;
+  --foreground: #F0F4FF;
   
-  /* Primary - Indigo */
-  --primary: #6366F1;
-  --primary-foreground: #FFFFFF;
+  /* Primary - Electric Cyan */
+  --primary: #00D4FF;
+  --primary-foreground: #030712;
   
-  /* Secondary */
-  --secondary: rgba(255, 255, 255, 0.06);
-  --secondary-foreground: #EDEFF7;
+  /* Secondary - Deep Blue */
+  --secondary: rgba(0, 102, 255, 0.15);
+  --secondary-foreground: #F0F4FF;
   
   /* Muted */
   --muted: rgba(255, 255, 255, 0.06);
-  --muted-foreground: #AAB0C0;
+  --muted-foreground: #94A3C8;
   
-  /* Accent */
-  --accent: rgba(99, 102, 241, 0.15);
-  --accent-foreground: #EDEFF7;
+  /* Accent - Tech Green */
+  --accent: rgba(0, 255, 136, 0.15);
+  --accent-foreground: #00FF88;
   
   /* Destructive */
-  --destructive: #EF4444;
+  --destructive: #FF3B5C;
   
   /* Border & Input */
-  --border: rgba(255, 255, 255, 0.12);
-  --input: rgba(255, 255, 255, 0.08);
-  --ring: #6366F1;
+  --border: rgba(0, 212, 255, 0.15);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: #00D4FF;
   
   /* Card */
-  --card: rgba(255, 255, 255, 0.06);
-  --card-foreground: #EDEFF7;
+  --card: rgba(0, 102, 255, 0.05);
+  --card-foreground: #F0F4FF;
   
   /* Popover */
-  --popover: rgba(20, 20, 25, 0.95);
-  --popover-foreground: #EDEFF7;
+  --popover: rgba(3, 7, 18, 0.98);
+  --popover-foreground: #F0F4FF;
   
   /* Sidebar */
-  --sidebar: rgba(10, 10, 15, 0.8);
-  --sidebar-foreground: #EDEFF7;
-  --sidebar-primary: #6366F1;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: rgba(99, 102, 241, 0.15);
-  --sidebar-accent-foreground: #EDEFF7;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #6366F1;
+  --sidebar: rgba(3, 7, 18, 0.9);
+  --sidebar-foreground: #F0F4FF;
+  --sidebar-primary: #00D4FF;
+  --sidebar-primary-foreground: #030712;
+  --sidebar-accent: rgba(0, 212, 255, 0.15);
+  --sidebar-accent-foreground: #F0F4FF;
+  --sidebar-border: rgba(0, 212, 255, 0.1);
+  --sidebar-ring: #00D4FF;
   
-  /* Chart colors */
-  --chart-1: #6366F1;
-  --chart-2: #8B5CF6;
-  --chart-3: #06B6D4;
-  --chart-4: #10B981;
-  --chart-5: #F59E0B;
+  /* Chart colors - Tech palette */
+  --chart-1: #00D4FF;
+  --chart-2: #0066FF;
+  --chart-3: #00FF88;
+  --chart-4: #FF6B35;
+  --chart-5: #A855F7;
   
-  /* Custom colors */
-  --text-primary: #EDEFF7;
-  --text-secondary: #AAB0C0;
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glow-primary: rgba(99, 102, 241, 0.5);
-  --glow-secondary: rgba(139, 92, 246, 0.5);
+  /* Custom colors - 智谈AI brand */
+  --text-primary: #F0F4FF;
+  --text-secondary: #94A3C8;
+  --glass-bg: rgba(0, 102, 255, 0.06);
+  --glass-border: rgba(0, 212, 255, 0.2);
+  --glow-primary: rgba(0, 212, 255, 0.6);
+  --glow-secondary: rgba(0, 102, 255, 0.5);
+  --glow-accent: rgba(0, 255, 136, 0.5);
+  
+  /* Neon colors */
+  --neon-cyan: #00D4FF;
+  --neon-blue: #0066FF;
+  --neon-green: #00FF88;
 }
 
 /* ========================
@@ -140,69 +147,85 @@
   
   body {
     @apply bg-background text-foreground antialiased;
-    background-color: #050505;
+    background-color: #030712;
     min-height: 100vh;
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-outfit), var(--font-jakarta), system-ui, sans-serif;
+    font-weight: 600;
   }
 }
 
 /* ========================
-   Glass Effects
+   Glass Effects - Enhanced Tech Style
    ======================== */
 @layer utilities {
-  /* Glass card background */
+  /* Glass card background with subtle grid */
   .glass {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 102, 255, 0.05);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
   }
   
-  /* Glass with border */
+  /* Glass with neon border */
   .glass-card {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.08) 0%, rgba(0, 212, 255, 0.04) 100%);
+    border: 1px solid rgba(0, 212, 255, 0.15);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
+    position: relative;
+  }
+  
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
   }
   
   /* Glass border only */
   .glass-border {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(0, 212, 255, 0.2);
   }
   
   /* Stronger glass for hover states */
   .glass-hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 102, 255, 0.1);
   }
   
-  /* Glow effects */
+  /* Glow effects - Cyan neon */
   .glow {
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 102, 255, 0.15);
   }
   
   .glow-sm {
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
   }
   
   .glow-lg {
-    box-shadow: 0 0 50px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 50px rgba(0, 212, 255, 0.4), 0 0 100px rgba(0, 102, 255, 0.2);
   }
   
   /* Text glow */
   .text-glow {
-    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 40px rgba(0, 212, 255, 0.3);
   }
   
-  /* Gradient text */
+  /* Gradient text - Primary */
   .gradient-text {
-    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%);
+    background: linear-gradient(135deg, #00D4FF 0%, #0066FF 50%, #00FF88 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
-  /* Gradient text variant 2 */
+  /* Gradient text variant 2 - Cyan to Blue */
   .gradient-text-alt {
-    background: linear-gradient(90deg, #007AFF 0%, #6366F1 50%, #8B5CF6 100%);
+    background: linear-gradient(90deg, #00D4FF 0%, #0066FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -211,19 +234,19 @@
   /* Gradient line (horizontal) */
   .gradient-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent, #6366F1, #8B5CF6, transparent);
+    background: linear-gradient(90deg, transparent, #00D4FF, #0066FF, transparent);
   }
   
   /* Gradient line vertical */
   .gradient-line-v {
     width: 1px;
-    background: linear-gradient(180deg, transparent, #6366F1, #8B5CF6, transparent);
+    background: linear-gradient(180deg, transparent, #00D4FF, #0066FF, transparent);
   }
   
-  /* Gradient border */
+  /* Gradient border with neon effect */
   .gradient-border {
     position: relative;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 102, 255, 0.06);
     border-radius: 1rem;
   }
   
@@ -233,11 +256,19 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.5), rgba(6, 182, 212, 0.3));
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.6), rgba(0, 102, 255, 0.4), rgba(0, 255, 136, 0.3));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+  }
+  
+  /* Neon border animation */
+  .neon-border {
+    position: relative;
+    border: 1px solid transparent;
+    background: linear-gradient(#030712, #030712) padding-box,
+                linear-gradient(135deg, #00D4FF, #0066FF, #00FF88) border-box;
   }
   
   /* Section container */
@@ -250,27 +281,43 @@
     @apply w-full max-w-[1280px] mx-auto px-6 md:px-8;
   }
   
-  /* Card hover animation */
+  /* Card hover animation with neon glow */
   .card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
   
   .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15), 0 0 30px rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
   }
   
-  /* Button glow effect */
+  /* Button glow effect - Cyan neon */
   .btn-glow {
     position: relative;
     overflow: hidden;
+  }
+  
+  .btn-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .btn-glow:hover::before {
+    left: 100%;
   }
   
   .btn-glow::after {
     content: '';
     position: absolute;
     inset: -2px;
-    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    background: linear-gradient(135deg, #00D4FF, #0066FF);
     border-radius: inherit;
     z-index: -1;
     opacity: 0;
@@ -282,60 +329,68 @@
     opacity: 0.6;
   }
   
-  /* Pill/Tag style */
+  /* Pill/Tag style - Tech version */
   .pill {
     @apply inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium;
-    background: rgba(99, 102, 241, 0.15);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    color: #EDEFF7;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.1));
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: #00D4FF;
   }
   
   /* Tab pill style */
   .tab-pill {
     @apply px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300;
     background: transparent;
-    color: #AAB0C0;
+    color: #94A3C8;
   }
   
   .tab-pill:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: #EDEFF7;
+    background: rgba(0, 212, 255, 0.1);
+    color: #F0F4FF;
   }
   
   .tab-pill.active {
-    background: #6366F1;
-    color: #FFFFFF;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    background: linear-gradient(135deg, #00D4FF, #0066FF);
+    color: #030712;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 102, 255, 0.2);
   }
 }
 
 /* ========================
-   Background Effects
+   Background Effects - Tech Grid & Particles
    ======================== */
 @layer utilities {
-  /* Hero gradient background */
+  /* Hero gradient background - Deep space with cyan/blue glow */
   .bg-hero-gradient {
     background: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.3), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 0%, rgba(139, 92, 246, 0.2), transparent),
-      radial-gradient(ellipse 40% 30% at 20% 10%, rgba(6, 182, 212, 0.15), transparent),
-      #050505;
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 212, 255, 0.2), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(0, 102, 255, 0.15), transparent),
+      radial-gradient(ellipse 40% 30% at 20% 20%, rgba(0, 255, 136, 0.1), transparent),
+      linear-gradient(180deg, #030712 0%, #0a0f1a 50%, #030712 100%);
   }
   
-  /* Section gradient spots */
+  /* Tech grid pattern overlay */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  /* Section gradient spots - Cyan/Blue */
   .bg-gradient-spot-left {
-    background: radial-gradient(ellipse 50% 50% at 0% 50%, rgba(99, 102, 241, 0.15), transparent);
+    background: radial-gradient(ellipse 50% 50% at 0% 50%, rgba(0, 212, 255, 0.12), transparent);
   }
   
   .bg-gradient-spot-right {
-    background: radial-gradient(ellipse 50% 50% at 100% 50%, rgba(139, 92, 246, 0.15), transparent);
+    background: radial-gradient(ellipse 50% 50% at 100% 50%, rgba(0, 102, 255, 0.12), transparent);
   }
   
   .bg-gradient-spot-center {
-    background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(99, 102, 241, 0.1), transparent);
+    background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0, 212, 255, 0.08), transparent);
   }
   
-  /* Animated gradient blob */
+  /* Animated gradient blob - Tech colors */
   .gradient-blob {
     position: absolute;
     border-radius: 50%;
@@ -347,7 +402,7 @@
   .gradient-blob-1 {
     width: 400px;
     height: 400px;
-    background: rgba(99, 102, 241, 0.4);
+    background: rgba(0, 212, 255, 0.35);
     top: -100px;
     left: 20%;
   }
@@ -355,7 +410,7 @@
   .gradient-blob-2 {
     width: 300px;
     height: 300px;
-    background: rgba(139, 92, 246, 0.3);
+    background: rgba(0, 102, 255, 0.3);
     top: 0;
     right: 15%;
     animation-delay: -2s;
@@ -364,10 +419,19 @@
   .gradient-blob-3 {
     width: 250px;
     height: 250px;
-    background: rgba(6, 182, 212, 0.25);
+    background: rgba(0, 255, 136, 0.2);
     top: 100px;
     left: 40%;
     animation-delay: -4s;
+  }
+  
+  /* Data flow lines animation */
+  .data-flow-line {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: linear-gradient(180deg, transparent, #00D4FF, transparent);
+    animation: data-flow 3s linear infinite;
   }
 }
 
@@ -400,10 +464,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4), 0 0 40px rgba(0, 102, 255, 0.2);
   }
   50% {
-    box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 0 80px rgba(0, 102, 255, 0.3);
   }
 }
 
@@ -411,6 +475,67 @@
   from {
     opacity: 0;
     transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes data-flow {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -432,6 +557,18 @@
     animation: fade-in-up 0.6s ease-out forwards;
   }
   
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-neon-flicker {
+    animation: neon-flicker 2s ease-in-out infinite;
+  }
+  
+  .animate-rotate-gradient {
+    animation: rotate-gradient 8s linear infinite;
+  }
+  
   .animation-delay-100 {
     animation-delay: 100ms;
   }
@@ -451,10 +588,22 @@
   .animation-delay-500 {
     animation-delay: 500ms;
   }
+  
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+  
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
 }
 
 /* ========================
-   Scrollbar Styling
+   Scrollbar Styling - Tech version
    ======================== */
 ::-webkit-scrollbar {
   width: 8px;
@@ -462,29 +611,40 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 102, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 212, 255, 0.2);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 212, 255, 0.3);
 }
 
 /* ========================
-   Code Block Styling
+   Code Block Styling - Tech theme
    ======================== */
 .code-block {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 212, 255, 0.15);
   border-radius: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.875rem;
   line-height: 1.7;
   overflow-x: auto;
+  position: relative;
+}
+
+.code-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00D4FF, transparent);
 }
 
 .code-block pre {
@@ -494,6 +654,56 @@
 
 /* Selection */
 ::selection {
-  background: rgba(99, 102, 241, 0.3);
+  background: rgba(0, 212, 255, 0.3);
   color: #FFFFFF;
+}
+
+/* ========================
+   Special Effects
+   ======================== */
+
+/* Scan line effect for tech feel */
+.scan-line-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00D4FF, transparent);
+  animation: scan-line 3s linear infinite;
+  opacity: 0.5;
+}
+
+/* Holographic effect */
+.holographic {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.1) 0%,
+    rgba(0, 102, 255, 0.05) 25%,
+    rgba(0, 255, 136, 0.1) 50%,
+    rgba(0, 102, 255, 0.05) 75%,
+    rgba(0, 212, 255, 0.1) 100%
+  );
+  background-size: 400% 400%;
+  animation: holographic-shift 8s ease infinite;
+}
+
+@keyframes holographic-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Circuit pattern for tech backgrounds */
+.circuit-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300D4FF' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }

@@ -25,14 +25,16 @@ export default function PrimaryButton({
   return (
     <button
       className={cn(
-        "relative inline-flex items-center justify-center rounded-full font-medium",
-        "bg-[#6366F1] text-white",
-        "hover:bg-[#5558E8] active:bg-[#4F52D9]",
+        "relative inline-flex items-center justify-center rounded-full font-semibold",
+        "bg-gradient-to-r from-[#00D4FF] to-[#0066FF] text-[#030712]",
+        "hover:from-[#00B8E0] hover:to-[#0055DD]",
+        "active:from-[#00A0C8] active:to-[#0044CC]",
         "transition-all duration-300",
-        glow && "btn-glow hover:shadow-lg hover:shadow-[#6366F1]/30",
+        "shadow-lg shadow-[#00D4FF]/20",
+        glow && "btn-glow hover:shadow-xl hover:shadow-[#00D4FF]/30",
         sizeClasses[size],
         fullWidth && "w-full",
-        "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none",
+        "disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg disabled:hover:shadow-[#00D4FF]/20",
         className
       )}
       {...props}
@@ -68,11 +70,13 @@ export function PrimaryButtonLink({
     <a
       href={href}
       className={cn(
-        "relative inline-flex items-center justify-center rounded-full font-medium",
-        "bg-[#6366F1] text-white",
-        "hover:bg-[#5558E8] active:bg-[#4F52D9]",
+        "relative inline-flex items-center justify-center rounded-full font-semibold",
+        "bg-gradient-to-r from-[#00D4FF] to-[#0066FF] text-[#030712]",
+        "hover:from-[#00B8E0] hover:to-[#0055DD]",
+        "active:from-[#00A0C8] active:to-[#0044CC]",
         "transition-all duration-300",
-        glow && "btn-glow hover:shadow-lg hover:shadow-[#6366F1]/30",
+        "shadow-lg shadow-[#00D4FF]/20",
+        glow && "btn-glow hover:shadow-xl hover:shadow-[#00D4FF]/30",
         sizeClasses[size],
         className
       )}
@@ -81,4 +85,3 @@ export function PrimaryButtonLink({
     </a>
   );
 }
-

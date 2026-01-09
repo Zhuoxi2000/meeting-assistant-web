@@ -42,8 +42,8 @@ export default function TabsPills({
           className={cn(
             "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
             activeTab === tab.id
-              ? "bg-[#6366F1] text-white shadow-lg shadow-[#6366F1]/30"
-              : "text-[#AAB0C0] hover:text-[#EDEFF7] hover:bg-white/5"
+              ? "bg-gradient-to-r from-[#00D4FF] to-[#0066FF] text-[#030712] shadow-lg shadow-[#00D4FF]/30"
+              : "text-[#94A3C8] hover:text-[#F0F4FF] hover:bg-[#00D4FF]/5"
           )}
         >
           {tab.label}
@@ -81,8 +81,8 @@ export function TabsPillsControlled({
           className={cn(
             "px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300",
             activeTab === tab.id
-              ? "bg-[#6366F1] text-white shadow-lg shadow-[#6366F1]/30"
-              : "text-[#AAB0C0] hover:text-[#EDEFF7] hover:bg-white/5"
+              ? "bg-gradient-to-r from-[#00D4FF] to-[#0066FF] text-[#030712] shadow-lg shadow-[#00D4FF]/30"
+              : "text-[#94A3C8] hover:text-[#F0F4FF] hover:bg-[#00D4FF]/5"
           )}
         >
           {tab.label}
@@ -91,4 +91,3 @@ export function TabsPillsControlled({
     </div>
   );
 }
-

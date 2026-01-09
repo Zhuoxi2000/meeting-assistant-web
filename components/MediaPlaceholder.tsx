@@ -33,26 +33,26 @@ export default function MediaPlaceholder({
         className
       )}
     >
-      {/* Gradient background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#6366F1]/10 via-transparent to-[#8B5CF6]/10" />
+      {/* Gradient background pattern - Tech style */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#00D4FF]/10 via-transparent to-[#0066FF]/10" />
       
       {/* Grid pattern overlay */}
       <div 
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
+            linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center gap-3 text-[#AAB0C0]">
+      <div className="relative z-10 flex flex-col items-center gap-3 text-[#94A3C8]">
         {showIcon && (
-          <div className="w-16 h-16 rounded-2xl glass flex items-center justify-center">
-            <Icon className="w-8 h-8" />
+          <div className="w-16 h-16 rounded-2xl glass border border-[#00D4FF]/20 flex items-center justify-center">
+            <Icon className="w-8 h-8 text-[#00D4FF]" />
           </div>
         )}
         {label && (
@@ -87,18 +87,18 @@ export function AvatarPlaceholder({
       className={cn(
         "rounded-full glass flex items-center justify-center",
         sizeClasses[size],
-        withBorder && "ring-2 ring-[#6366F1]/30",
+        withBorder && "ring-2 ring-[#00D4FF]/30",
         className
       )}
     >
-      <div className="w-full h-full rounded-full bg-gradient-to-br from-[#6366F1]/30 to-[#8B5CF6]/30 flex items-center justify-center">
-        <FileImage className="w-1/3 h-1/3 text-[#AAB0C0]" />
+      <div className="w-full h-full rounded-full bg-gradient-to-br from-[#00D4FF]/30 to-[#0066FF]/30 flex items-center justify-center">
+        <FileImage className="w-1/3 h-1/3 text-[#94A3C8]" />
       </div>
     </div>
   );
 }
 
-// Screenshot placeholder - for app screenshots
+// Screenshot placeholder - for app screenshots - Tech style
 interface ScreenshotPlaceholderProps {
   className?: string;
   title?: string;
@@ -116,24 +116,23 @@ export function ScreenshotPlaceholder({
       )}
     >
       {/* Window header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[#00D4FF]/10">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-500/60" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
           <div className="w-3 h-3 rounded-full bg-green-500/60" />
         </div>
         {title && (
-          <span className="text-xs text-[#AAB0C0] ml-2">{title}</span>
+          <span className="text-xs text-[#94A3C8] ml-2">{title}</span>
         )}
       </div>
       
       {/* Content area */}
       <div className="aspect-video p-4">
-        <div className="w-full h-full rounded-lg bg-gradient-to-br from-[#6366F1]/5 to-[#8B5CF6]/5 flex items-center justify-center">
-          <Image className="w-12 h-12 text-[#AAB0C0]/50" />
+        <div className="w-full h-full rounded-lg bg-gradient-to-br from-[#00D4FF]/5 to-[#0066FF]/5 flex items-center justify-center border border-[#00D4FF]/10">
+          <Image className="w-12 h-12 text-[#00D4FF]/50" />
         </div>
       </div>
     </div>
   );
 }
-

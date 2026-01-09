@@ -123,8 +123,8 @@ function CheckoutContent() {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 rounded-full border-4 border-[#6366F1] border-t-transparent animate-spin mx-auto mb-4" />
-          <p className="text-[#AAB0C0]">加载中...</p>
+          <div className="w-12 h-12 rounded-full border-4 border-[#00D4FF] border-t-transparent animate-spin mx-auto mb-4" />
+          <p className="text-[#94A3C8]">加载中...</p>
         </div>
       </div>
     );
@@ -135,11 +135,11 @@ function CheckoutContent() {
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <Section className="max-w-lg mx-auto">
           <GlassCard className="text-center py-12">
-            <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-10 h-10 text-green-400" />
+            <div className="w-20 h-20 rounded-full bg-[#00FF88]/20 flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="w-10 h-10 text-[#00FF88]" />
             </div>
-            <h2 className="text-2xl font-bold text-[#EDEFF7] mb-2">支付成功</h2>
-            <p className="text-[#AAB0C0] mb-6">您的套餐已激活，即将跳转到用户中心...</p>
+            <h2 className="text-2xl font-bold text-[#F0F4FF] mb-2">支付成功</h2>
+            <p className="text-[#94A3C8] mb-6">您的套餐已激活，即将跳转到用户中心...</p>
             <PrimaryButton onClick={() => router.push("/user")}>
               立即前往
             </PrimaryButton>
@@ -157,8 +157,8 @@ function CheckoutContent() {
             <div className="w-20 h-20 rounded-full bg-red-500/20 flex items-center justify-center mx-auto mb-6">
               <AlertCircle className="w-10 h-10 text-red-400" />
             </div>
-            <h2 className="text-2xl font-bold text-[#EDEFF7] mb-2">加载失败</h2>
-            <p className="text-[#AAB0C0] mb-6">{error}</p>
+            <h2 className="text-2xl font-bold text-[#F0F4FF] mb-2">加载失败</h2>
+            <p className="text-[#94A3C8] mb-6">{error}</p>
             <SecondaryButton onClick={() => router.push("/pricing")}>
               返回套餐页
             </SecondaryButton>
@@ -176,11 +176,11 @@ function CheckoutContent() {
           <div className="flex items-center gap-4 mb-8">
             <button
               onClick={() => router.push("/pricing")}
-              className="p-2 rounded-lg hover:bg-white/[0.05] transition-colors"
+              className="p-2 rounded-lg hover:bg-[#00D4FF]/10 transition-colors"
             >
-              <ArrowLeft className="w-6 h-6 text-[#AAB0C0]" />
+              <ArrowLeft className="w-6 h-6 text-[#94A3C8]" />
             </button>
-            <h1 className="text-2xl font-bold text-[#EDEFF7]">确认订单</h1>
+            <h1 className="text-2xl font-bold text-[#F0F4FF]">确认订单</h1>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -188,36 +188,36 @@ function CheckoutContent() {
             <div className="lg:col-span-2 space-y-6">
               {/* Package Info */}
               <GlassCard>
-                <h2 className="text-lg font-semibold text-[#EDEFF7] mb-4">套餐详情</h2>
+                <h2 className="text-lg font-semibold text-[#F0F4FF] mb-4">套餐详情</h2>
                 {packageInfo && (
                   <div className="space-y-4">
                     <div className="flex items-start gap-4">
-                      <div className="w-14 h-14 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1]">
-                        <Zap className="w-7 h-7" />
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#0066FF] flex items-center justify-center">
+                        <Zap className="w-7 h-7 text-[#030712]" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-[#EDEFF7]">{packageInfo.name}</h3>
-                        <p className="text-sm text-[#AAB0C0]">{packageInfo.description}</p>
+                        <h3 className="text-xl font-bold text-[#F0F4FF]">{packageInfo.name}</h3>
+                        <p className="text-sm text-[#94A3C8]">{packageInfo.description}</p>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
-                      <div className="p-3 rounded-xl bg-white/[0.03]">
-                        <p className="text-sm text-[#AAB0C0] mb-1">基础模型时间</p>
-                        <p className="text-lg font-semibold text-[#EDEFF7]">
+                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#00D4FF]/10">
+                      <div className="p-3 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/10">
+                        <p className="text-sm text-[#94A3C8] mb-1">基础模型时间</p>
+                        <p className="text-lg font-semibold text-[#F0F4FF]">
                           {formatMinutes(packageInfo.basic_minutes)}
                         </p>
                       </div>
-                      <div className="p-3 rounded-xl bg-white/[0.03]">
-                        <p className="text-sm text-[#AAB0C0] mb-1">强模型时间</p>
-                        <p className="text-lg font-semibold text-[#EDEFF7]">
+                      <div className="p-3 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/10">
+                        <p className="text-sm text-[#94A3C8] mb-1">强模型时间</p>
+                        <p className="text-lg font-semibold text-[#F0F4FF]">
                           {formatMinutes(packageInfo.premium_minutes)}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-sm text-[#AAB0C0]">
-                      <Clock className="w-4 h-4" />
+                    <div className="flex items-center gap-2 text-sm text-[#94A3C8]">
+                      <Clock className="w-4 h-4 text-[#00D4FF]" />
                       <span>
                         {packageInfo.validity_days === 0 
                           ? "永久有效，用完为止" 
@@ -231,7 +231,7 @@ function CheckoutContent() {
 
               {/* Payment Method */}
               <GlassCard>
-                <h2 className="text-lg font-semibold text-[#EDEFF7] mb-4">支付方式</h2>
+                <h2 className="text-lg font-semibold text-[#F0F4FF] mb-4">支付方式</h2>
                 <div className="space-y-3">
                   {[
                     { id: "mock", name: "模拟支付", icon: <CreditCard className="w-6 h-6" />, desc: "测试环境" },
@@ -244,27 +244,27 @@ function CheckoutContent() {
                       disabled={method.id !== "mock"}
                       className={`w-full p-4 rounded-xl border transition-all ${
                         selectedPayment === method.id
-                          ? "border-[#6366F1] bg-[#6366F1]/10"
+                          ? "border-[#00D4FF] bg-[#00D4FF]/10"
                           : method.id === "mock"
-                          ? "border-white/10 hover:border-white/20"
-                          : "border-white/10 opacity-50 cursor-not-allowed"
+                          ? "border-[#00D4FF]/20 hover:border-[#00D4FF]/40"
+                          : "border-[#00D4FF]/10 opacity-50 cursor-not-allowed"
                       }`}
                     >
                       <div className="flex items-center gap-4">
                         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                           method.id === "wechat" ? "bg-[#07C160]/20 text-[#07C160]" :
                           method.id === "alipay" ? "bg-[#1677FF]/20 text-[#1677FF]" :
-                          "bg-[#6366F1]/20 text-[#6366F1]"
+                          "bg-[#00D4FF]/20 text-[#00D4FF]"
                         }`}>
                           {method.icon}
                         </div>
                         <div className="flex-1 text-left">
-                          <p className="font-medium text-[#EDEFF7]">{method.name}</p>
-                          <p className="text-sm text-[#AAB0C0]">{method.desc}</p>
+                          <p className="font-medium text-[#F0F4FF]">{method.name}</p>
+                          <p className="text-sm text-[#94A3C8]">{method.desc}</p>
                         </div>
                         {selectedPayment === method.id && (
-                          <div className="w-6 h-6 rounded-full bg-[#6366F1] flex items-center justify-center">
-                            <Check className="w-4 h-4 text-white" />
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#0066FF] flex items-center justify-center">
+                            <Check className="w-4 h-4 text-[#030712]" />
                           </div>
                         )}
                       </div>
@@ -278,24 +278,24 @@ function CheckoutContent() {
             <div className="lg:col-span-1">
               <div className="sticky top-28">
                 <GlassCard>
-                  <h2 className="text-lg font-semibold text-[#EDEFF7] mb-4">订单摘要</h2>
+                  <h2 className="text-lg font-semibold text-[#F0F4FF] mb-4">订单摘要</h2>
                   
                   {order && (
                     <div className="space-y-4">
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#AAB0C0]">订单号</span>
-                        <span className="text-[#EDEFF7] font-mono">{order.order_no}</span>
+                        <span className="text-[#94A3C8]">订单号</span>
+                        <span className="text-[#F0F4FF] font-mono">{order.order_no}</span>
                       </div>
                       
                       <div className="flex justify-between text-sm">
-                        <span className="text-[#AAB0C0]">套餐</span>
-                        <span className="text-[#EDEFF7]">{order.package_name}</span>
+                        <span className="text-[#94A3C8]">套餐</span>
+                        <span className="text-[#F0F4FF]">{order.package_name}</span>
                       </div>
 
-                      <div className="pt-4 border-t border-white/10">
+                      <div className="pt-4 border-t border-[#00D4FF]/10">
                         <div className="flex justify-between items-baseline">
-                          <span className="text-[#AAB0C0]">应付金额</span>
-                          <span className="text-3xl font-bold text-[#EDEFF7]">
+                          <span className="text-[#94A3C8]">应付金额</span>
+                          <span className="text-3xl font-bold text-[#00D4FF]">
                             ¥{(order.amount_cents / 100).toFixed(0)}
                           </span>
                         </div>
@@ -315,7 +315,7 @@ function CheckoutContent() {
                       >
                         {isPaying ? (
                           <span className="flex items-center">
-                            <div className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin mr-2" />
+                            <div className="w-5 h-5 rounded-full border-2 border-[#030712]/30 border-t-[#030712] animate-spin mr-2" />
                             处理中...
                           </span>
                         ) : (
@@ -323,8 +323,8 @@ function CheckoutContent() {
                         )}
                       </PrimaryButton>
 
-                      <div className="flex items-center justify-center gap-2 text-xs text-[#AAB0C0]">
-                        <Shield className="w-4 h-4" />
+                      <div className="flex items-center justify-center gap-2 text-xs text-[#94A3C8]">
+                        <Shield className="w-4 h-4 text-[#00FF88]" />
                         <span>安全支付，资金有保障</span>
                       </div>
                     </div>
@@ -344,8 +344,8 @@ export default function CheckoutPage() {
     <Suspense fallback={
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 rounded-full border-4 border-[#6366F1] border-t-transparent animate-spin mx-auto mb-4" />
-          <p className="text-[#AAB0C0]">加载中...</p>
+          <div className="w-12 h-12 rounded-full border-4 border-[#00D4FF] border-t-transparent animate-spin mx-auto mb-4" />
+          <p className="text-[#94A3C8]">加载中...</p>
         </div>
       </div>
     }>
@@ -353,8 +353,3 @@ export default function CheckoutPage() {
     </Suspense>
   );
 }
-
-
-
-
-

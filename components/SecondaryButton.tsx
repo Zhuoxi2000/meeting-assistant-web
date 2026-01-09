@@ -23,9 +23,11 @@ export default function SecondaryButton({
   return (
     <button
       className={cn(
-        "relative inline-flex items-center justify-center rounded-full font-medium",
-        "glass-card text-[#EDEFF7]",
-        "hover:bg-white/10 active:bg-white/5",
+        "relative inline-flex items-center justify-center rounded-full font-semibold",
+        "bg-transparent text-[#F0F4FF]",
+        "border border-[#00D4FF]/30",
+        "hover:bg-[#00D4FF]/10 hover:border-[#00D4FF]/50 hover:text-[#00D4FF]",
+        "active:bg-[#00D4FF]/5",
         "transition-all duration-300",
         sizeClasses[size],
         fullWidth && "w-full",
@@ -63,9 +65,11 @@ export function SecondaryButtonLink({
     <a
       href={href}
       className={cn(
-        "relative inline-flex items-center justify-center rounded-full font-medium",
-        "glass-card text-[#EDEFF7]",
-        "hover:bg-white/10 active:bg-white/5",
+        "relative inline-flex items-center justify-center rounded-full font-semibold",
+        "bg-transparent text-[#F0F4FF]",
+        "border border-[#00D4FF]/30",
+        "hover:bg-[#00D4FF]/10 hover:border-[#00D4FF]/50 hover:text-[#00D4FF]",
+        "active:bg-[#00D4FF]/5",
         "transition-all duration-300",
         sizeClasses[size],
         className
@@ -75,4 +79,3 @@ export function SecondaryButtonLink({
     </a>
   );
 }
-

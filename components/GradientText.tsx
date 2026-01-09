@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 interface GradientTextProps {
   children: ReactNode;
   className?: string;
-  variant?: "default" | "alt" | "cyan";
+  variant?: "default" | "alt" | "cyan" | "green";
   as?: "span" | "h1" | "h2" | "h3" | "p";
 }
 
@@ -15,9 +15,10 @@ export default function GradientText({
   as: Component = "span",
 }: GradientTextProps) {
   const gradientClasses = {
-    default: "bg-gradient-to-r from-[#6366F1] via-[#8B5CF6] to-[#06B6D4]",
-    alt: "bg-gradient-to-r from-[#007AFF] via-[#6366F1] to-[#8B5CF6]",
-    cyan: "bg-gradient-to-r from-[#06B6D4] via-[#6366F1] to-[#8B5CF6]",
+    default: "bg-gradient-to-r from-[#00D4FF] via-[#0066FF] to-[#00FF88]",
+    alt: "bg-gradient-to-r from-[#00D4FF] to-[#0066FF]",
+    cyan: "bg-gradient-to-r from-[#00FF88] via-[#00D4FF] to-[#0066FF]",
+    green: "bg-gradient-to-r from-[#00FF88] to-[#00D4FF]",
   };
 
   return (
@@ -32,4 +33,3 @@ export default function GradientText({
     </Component>
   );
 }
-

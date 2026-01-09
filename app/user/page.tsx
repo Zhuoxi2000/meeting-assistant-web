@@ -11,7 +11,7 @@ import {
   User, Lock, LogIn, UserPlus, Eye, EyeOff, LogOut, 
   Settings, CreditCard, History, Copy, Check, RefreshCw,
   Smartphone, Monitor, Zap, Clock, Gift, ChevronRight,
-  Package, AlertCircle
+  Package, AlertCircle, Sparkles
 } from "lucide-react";
 import { apiClient, type DeviceClaimCodeResponse, type QuotaResponse } from "@/lib/api";
 
@@ -40,7 +40,7 @@ function QuotaProgress({
   used, 
   total, 
   label,
-  colorClass = "bg-[#6366F1]"
+  colorClass = "bg-gradient-to-r from-[#00D4FF] to-[#0066FF]"
 }: { 
   used: number; 
   total: number; 
@@ -53,12 +53,12 @@ function QuotaProgress({
   return (
     <div className="space-y-2">
       <div className="flex justify-between text-sm">
-        <span className="text-[#AAB0C0]">{label}</span>
-        <span className="text-[#EDEFF7] font-medium">
+        <span className="text-[#94A3C8]">{label}</span>
+        <span className="text-[#F0F4FF] font-medium">
           {formatMinutes(remaining)} / {formatMinutes(total)}
         </span>
       </div>
-      <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+      <div className="h-2 rounded-full bg-[#0066FF]/10 overflow-hidden">
         <div 
           className={`h-full rounded-full transition-all duration-500 ${colorClass}`}
           style={{ width: `${100 - percentage}%` }}
@@ -133,12 +133,12 @@ function DeviceClaimCodeCard() {
   return (
     <GlassCard className="mt-6">
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1]">
-          <Smartphone className="w-5 h-5" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#0066FF] flex items-center justify-center">
+          <Smartphone className="w-5 h-5 text-[#030712]" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-[#EDEFF7]">设备绑定</h3>
-          <p className="text-sm text-[#AAB0C0]">将您的 macOS 客户端绑定到此账号</p>
+          <h3 className="text-lg font-semibold text-[#F0F4FF]">设备绑定</h3>
+          <p className="text-sm text-[#94A3C8]">将您的 macOS 客户端绑定到此账号</p>
         </div>
       </div>
 
@@ -150,33 +150,33 @@ function DeviceClaimCodeCard() {
 
       {claimCode ? (
         <div className="space-y-4">
-          <div className="p-6 rounded-xl bg-white/[0.03] border border-white/10 text-center">
-            <p className="text-sm text-[#AAB0C0] mb-2">绑定码</p>
+          <div className="p-6 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/20 text-center">
+            <p className="text-sm text-[#94A3C8] mb-2">绑定码</p>
             <div className="flex items-center justify-center gap-3">
-              <span className="text-4xl font-mono font-bold text-[#EDEFF7] tracking-wider">
+              <span className="text-4xl font-mono font-bold text-[#00D4FF] tracking-wider text-glow">
                 {claimCode.claim_code}
               </span>
               <button
                 onClick={copyToClipboard}
-                className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] transition-colors"
+                className="p-2 rounded-lg bg-[#00D4FF]/10 hover:bg-[#00D4FF]/20 transition-colors"
               >
                 {copied ? (
-                  <Check className="w-5 h-5 text-green-400" />
+                  <Check className="w-5 h-5 text-[#00FF88]" />
                 ) : (
-                  <Copy className="w-5 h-5 text-[#AAB0C0]" />
+                  <Copy className="w-5 h-5 text-[#94A3C8]" />
                 )}
               </button>
             </div>
-            <p className="text-sm text-[#AAB0C0] mt-3">
-              有效时间: <span className="text-[#6366F1] font-mono">{formatTime(countdown)}</span>
+            <p className="text-sm text-[#94A3C8] mt-3">
+              有效时间: <span className="text-[#00D4FF] font-mono">{formatTime(countdown)}</span>
             </p>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#6366F1]/10 border border-[#6366F1]/30">
-            <p className="text-sm text-[#AAB0C0]">
-              <strong className="text-[#EDEFF7]">使用方法：</strong>
+          <div className="p-4 rounded-xl bg-[#00D4FF]/10 border border-[#00D4FF]/30">
+            <p className="text-sm text-[#94A3C8]">
+              <strong className="text-[#F0F4FF]">使用方法：</strong>
             </p>
-            <ol className="text-sm text-[#AAB0C0] mt-2 space-y-1 list-decimal list-inside">
+            <ol className="text-sm text-[#94A3C8] mt-2 space-y-1 list-decimal list-inside">
               <li>打开 macOS 客户端</li>
               <li>点击"登录"按钮</li>
               <li>输入上方的绑定码</li>
@@ -194,10 +194,10 @@ function DeviceClaimCodeCard() {
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
+          <div className="p-4 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/10">
             <div className="flex items-center gap-3 mb-3">
-              <Monitor className="w-5 h-5 text-[#AAB0C0]" />
-              <span className="text-sm text-[#AAB0C0]">
+              <Monitor className="w-5 h-5 text-[#00D4FF]" />
+              <span className="text-sm text-[#94A3C8]">
                 在 macOS 客户端中输入绑定码，即可将客户端与您的账号关联
               </span>
             </div>
@@ -269,9 +269,9 @@ function SubscriptionCard() {
     return (
       <GlassCard>
         <div className="animate-pulse space-y-4">
-          <div className="h-6 bg-white/10 rounded w-1/3"></div>
-          <div className="h-4 bg-white/10 rounded w-1/2"></div>
-          <div className="h-2 bg-white/10 rounded"></div>
+          <div className="h-6 bg-[#00D4FF]/10 rounded w-1/3"></div>
+          <div className="h-4 bg-[#00D4FF]/10 rounded w-1/2"></div>
+          <div className="h-2 bg-[#00D4FF]/10 rounded"></div>
         </div>
       </GlassCard>
     );
@@ -282,21 +282,21 @@ function SubscriptionCard() {
     return (
       <GlassCard>
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1]">
-            <Package className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#0066FF] flex items-center justify-center">
+            <Package className="w-5 h-5 text-[#030712]" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-[#EDEFF7]">我的套餐</h3>
-            <p className="text-sm text-[#AAB0C0]">暂无有效套餐</p>
+            <h3 className="text-lg font-semibold text-[#F0F4FF]">我的套餐</h3>
+            <p className="text-sm text-[#94A3C8]">暂无有效套餐</p>
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 mb-4">
+        <div className="p-4 rounded-xl bg-[#00FF88]/10 border border-[#00FF88]/30 mb-4">
           <div className="flex items-center gap-2 mb-2">
-            <Gift className="w-5 h-5 text-green-400" />
-            <span className="font-medium text-green-400">新用户专享</span>
+            <Gift className="w-5 h-5 text-[#00FF88]" />
+            <span className="font-medium text-[#00FF88]">新用户专享</span>
           </div>
-          <p className="text-sm text-[#AAB0C0]">
+          <p className="text-sm text-[#94A3C8]">
             激活 7 天体验套餐，获得 30 分钟基础模型使用时间
           </p>
         </div>
@@ -325,19 +325,19 @@ function SubscriptionCard() {
     <GlassCard>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1]">
-            <Zap className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#0066FF] flex items-center justify-center">
+            <Zap className="w-5 h-5 text-[#030712]" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-[#EDEFF7]">
+            <h3 className="text-lg font-semibold text-[#F0F4FF]">
               {quota.package_name || "当前套餐"}
             </h3>
             {quota.earliest_expires_at ? (
-              <p className="text-sm text-[#AAB0C0]">
+              <p className="text-sm text-[#94A3C8]">
                 到期时间: {new Date(quota.earliest_expires_at).toLocaleDateString("zh-CN")}
               </p>
             ) : (
-              <p className="text-sm text-green-400">永久有效</p>
+              <p className="text-sm text-[#00FF88]">永久有效</p>
             )}
           </div>
         </div>
@@ -352,13 +352,13 @@ function SubscriptionCard() {
           used={quota.basic_minutes_used}
           total={quota.basic_minutes_total}
           label="基础模型"
-          colorClass="bg-[#6366F1]"
+          colorClass="bg-gradient-to-r from-[#00D4FF] to-[#0066FF]"
         />
         <QuotaProgress
           used={quota.premium_minutes_used}
           total={quota.premium_minutes_total}
           label="强模型"
-          colorClass="bg-purple-500"
+          colorClass="bg-gradient-to-r from-[#A855F7] to-[#0066FF]"
         />
       </div>
 
@@ -468,14 +468,14 @@ function LoginForm() {
     <div className="max-w-md mx-auto">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] mb-6">
-          <User className="w-10 h-10 text-white" />
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-gradient-to-br from-[#00D4FF] to-[#0066FF] mb-6 shadow-lg shadow-[#00D4FF]/30">
+          <Sparkles className="w-10 h-10 text-[#030712]" />
         </div>
-        <h1 className="text-3xl font-bold text-[#EDEFF7] mb-2">
+        <h1 className="text-3xl font-bold text-[#F0F4FF] mb-2">
           {isLogin ? "欢迎回来" : "创建账号"}
         </h1>
-        <p className="text-[#AAB0C0]">
-          {isLogin ? "登录您的智语面试账号" : "注册开始您的面试之旅"}
+        <p className="text-[#94A3C8]">
+          {isLogin ? "登录您的智谈AI账号" : "注册开始您的面试之旅"}
         </p>
       </div>
 
@@ -491,17 +491,17 @@ function LoginForm() {
 
           {/* Username */}
           <div>
-            <label className="block text-sm font-medium text-[#EDEFF7] mb-2">
+            <label className="block text-sm font-medium text-[#F0F4FF] mb-2">
               用户名
             </label>
             <div className="relative">
-              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0]" />
+              <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3C8]" />
               <input
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="请输入用户名"
-                className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] placeholder:text-[#AAB0C0]/50 focus:outline-none focus:border-[#6366F1]/50 transition-colors"
+                className="w-full h-12 pl-12 pr-4 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/20 text-[#F0F4FF] placeholder:text-[#94A3C8]/50 focus:outline-none focus:border-[#00D4FF]/50 transition-colors"
                 required
                 minLength={3}
               />
@@ -510,24 +510,24 @@ function LoginForm() {
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-[#EDEFF7] mb-2">
+            <label className="block text-sm font-medium text-[#F0F4FF] mb-2">
               密码
             </label>
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0]" />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3C8]" />
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full h-12 pl-12 pr-12 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] placeholder:text-[#AAB0C0]/50 focus:outline-none focus:border-[#6366F1]/50 transition-colors"
+                className="w-full h-12 pl-12 pr-12 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/20 text-[#F0F4FF] placeholder:text-[#94A3C8]/50 focus:outline-none focus:border-[#00D4FF]/50 transition-colors"
                 required
                 minLength={6}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#AAB0C0] hover:text-[#EDEFF7] transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#94A3C8] hover:text-[#00D4FF] transition-colors"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -541,17 +541,17 @@ function LoginForm() {
           {/* Confirm Password (Register only) */}
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-[#EDEFF7] mb-2">
+              <label className="block text-sm font-medium text-[#F0F4FF] mb-2">
                 确认密码
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0]" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3C8]" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full h-12 pl-12 pr-4 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] placeholder:text-[#AAB0C0]/50 focus:outline-none focus:border-[#6366F1]/50 transition-colors"
+                  className="w-full h-12 pl-12 pr-4 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/20 text-[#F0F4FF] placeholder:text-[#94A3C8]/50 focus:outline-none focus:border-[#00D4FF]/50 transition-colors"
                   required
                   minLength={6}
                 />
@@ -564,7 +564,7 @@ function LoginForm() {
             <div className="text-right">
               <button
                 type="button"
-                className="text-sm text-[#6366F1] hover:text-[#8B5CF6] transition-colors"
+                className="text-sm text-[#00D4FF] hover:text-[#00B8E0] transition-colors"
               >
                 忘记密码？
               </button>
@@ -597,10 +597,10 @@ function LoginForm() {
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10" />
+              <div className="w-full border-t border-[#00D4FF]/10" />
             </div>
             <div className="relative flex justify-center">
-              <span className="bg-[rgba(255,255,255,0.06)] px-4 text-sm text-[#AAB0C0] rounded-full">
+              <span className="bg-[#030712] px-4 text-sm text-[#94A3C8] rounded-full">
                 或使用以下方式登录
               </span>
             </div>
@@ -622,11 +622,11 @@ function LoginForm() {
         </form>
 
         {/* Toggle Login/Register */}
-        <div className="mt-6 text-center text-sm text-[#AAB0C0]">
+        <div className="mt-6 text-center text-sm text-[#94A3C8]">
           {isLogin ? "还没有账号？" : "已有账号？"}
           <button
             onClick={toggleMode}
-            className="ml-1 text-[#6366F1] hover:text-[#8B5CF6] font-medium transition-colors"
+            className="ml-1 text-[#00D4FF] hover:text-[#00B8E0] font-medium transition-colors"
           >
             {isLogin ? "立即注册" : "立即登录"}
           </button>
@@ -634,13 +634,13 @@ function LoginForm() {
       </GlassCard>
 
       {/* Terms */}
-      <p className="mt-6 text-center text-xs text-[#AAB0C0]">
+      <p className="mt-6 text-center text-xs text-[#94A3C8]">
         {isLogin ? "登录即表示您同意我们的" : "注册即表示您同意我们的"}
-        <a href="/terms" className="text-[#6366F1] hover:underline mx-1">
+        <a href="/terms" className="text-[#00D4FF] hover:underline mx-1">
           用户协议
         </a>
         和
-        <a href="/privacy" className="text-[#6366F1] hover:underline mx-1">
+        <a href="/privacy" className="text-[#00D4FF] hover:underline mx-1">
           隐私政策
         </a>
       </p>
@@ -680,7 +680,7 @@ function UserDashboard() {
       <GlassCard className="mb-6">
         <div className="flex flex-col sm:flex-row items-center gap-6">
           {/* Avatar */}
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] flex items-center justify-center text-white text-3xl font-bold overflow-hidden">
+          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#0066FF] flex items-center justify-center text-[#030712] text-3xl font-bold overflow-hidden shadow-lg shadow-[#00D4FF]/30">
             {session?.user?.image ? (
               <img 
                 src={session.user.image} 
@@ -694,10 +694,10 @@ function UserDashboard() {
           
           {/* User Details */}
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-[#EDEFF7] mb-1">
+            <h1 className="text-2xl font-bold text-[#F0F4FF] mb-1">
               {session?.user?.name || "用户"}
             </h1>
-            <p className="text-[#AAB0C0] mb-3">
+            <p className="text-[#94A3C8] mb-3">
               {session?.user?.email || "未设置邮箱"}
             </p>
           </div>
@@ -729,18 +729,18 @@ function UserDashboard() {
             onClick={() => item.href !== "#" && router.push(item.href)}
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#6366F1]/20 flex items-center justify-center text-[#6366F1] group-hover:bg-[#6366F1] group-hover:text-white transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-[#00D4FF]/10 border border-[#00D4FF]/20 flex items-center justify-center text-[#00D4FF] group-hover:bg-gradient-to-br group-hover:from-[#00D4FF] group-hover:to-[#0066FF] group-hover:text-[#030712] group-hover:border-transparent transition-all duration-300">
                 {item.icon}
               </div>
               <div className="flex-1">
-                <h3 className="text-sm font-semibold text-[#EDEFF7]">
+                <h3 className="text-sm font-semibold text-[#F0F4FF]">
                   {item.label}
                 </h3>
-                <p className="text-xs text-[#AAB0C0]">
+                <p className="text-xs text-[#94A3C8]">
                   {item.description}
                 </p>
               </div>
-              <ChevronRight className="w-5 h-5 text-[#AAB0C0] group-hover:text-[#6366F1] transition-colors" />
+              <ChevronRight className="w-5 h-5 text-[#94A3C8] group-hover:text-[#00D4FF] transition-colors" />
             </div>
           </GlassCard>
         ))}
@@ -757,8 +757,8 @@ export default function UserPage() {
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 rounded-full border-4 border-[#6366F1] border-t-transparent animate-spin mx-auto mb-4" />
-          <p className="text-[#AAB0C0]">加载中...</p>
+          <div className="w-12 h-12 rounded-full border-4 border-[#00D4FF] border-t-transparent animate-spin mx-auto mb-4" />
+          <p className="text-[#94A3C8]">加载中...</p>
         </div>
       </div>
     );

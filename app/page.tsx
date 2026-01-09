@@ -9,65 +9,97 @@ import MediaPlaceholder, { AvatarPlaceholder, ScreenshotPlaceholder } from "@/co
 import PrimaryButton from "@/components/PrimaryButton";
 import SecondaryButton from "@/components/SecondaryButton";
 import FAQAccordion from "@/components/FAQAccordion";
-import { Users, Zap, Globe, Shield, Upload, ChevronDown, Check } from "lucide-react";
+import { Users, Zap, Globe, Shield, Upload, ChevronDown, Check, Cpu, Brain, Mic, Target, Sparkles, ArrowRight } from "lucide-react";
 
 // ========================
-// Section A: Hero
+// Section A: Hero - 智谈AI
 // ========================
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Background gradient blobs */}
+      {/* Tech background effects */}
       <div className="absolute inset-0 bg-hero-gradient" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-50" />
+      
+      {/* Animated gradient blobs */}
       <div className="gradient-blob gradient-blob-1" />
       <div className="gradient-blob gradient-blob-2" />
       <div className="gradient-blob gradient-blob-3" />
 
+      {/* Floating particles effect - decorative lines */}
+      <div className="absolute top-1/4 left-10 w-px h-32 bg-gradient-to-b from-transparent via-[#00D4FF]/30 to-transparent animate-pulse" />
+      <div className="absolute top-1/3 right-20 w-px h-24 bg-gradient-to-b from-transparent via-[#0066FF]/30 to-transparent animate-pulse animation-delay-300" />
+      <div className="absolute bottom-1/4 left-1/4 w-px h-20 bg-gradient-to-b from-transparent via-[#00FF88]/30 to-transparent animate-pulse animation-delay-500" />
+
       <div className="container-custom relative z-10 text-center py-20">
+        {/* AI Badge */}
+        <div className="flex justify-center mb-8 animate-fade-in-up">
+          <div className="pill flex items-center gap-2">
+            <Sparkles className="w-4 h-4" />
+            <span>AI驱动的面试革命</span>
+          </div>
+        </div>
+
         {/* Main heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-          <span className="block text-[#EDEFF7] mb-2">每一个人</span>
-          <span className="block">
-            都可能成为{" "}
-            <GradientText className="inline">Offer达人</GradientText>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-in-up animation-delay-100">
+          <span className="block text-[#F0F4FF] mb-2">让<GradientText className="inline">智能</GradientText>成为你的</span>
+          <span className="block text-[#F0F4FF]">
+            面试<span className="text-glow text-[#00D4FF]">优势</span>
           </span>
         </h1>
 
-        {/* Pill tag */}
-        <div className="flex justify-center mb-8">
-          <span className="pill">
-            互联网大厂
-          </span>
-        </div>
-
         {/* Description */}
-        <div className="max-w-2xl mx-auto mb-10 space-y-2">
-          <p className="text-base md:text-lg text-[#AAB0C0] leading-relaxed">
-            智语面试用AI帮你直达梦想Offer，实时语音转录，高质量面试回答
+        <div className="max-w-2xl mx-auto mb-10 space-y-3 animate-fade-in-up animation-delay-200">
+          <p className="text-lg md:text-xl text-[#94A3C8] leading-relaxed">
+            智谈AI运用前沿人工智能技术，为你的每一场面试提供
           </p>
-          <p className="text-base md:text-lg text-[#AAB0C0] leading-relaxed">
-            支持8种语言，同声传译
+          <p className="text-lg md:text-xl text-[#F0F4FF] font-medium">
+            实时转录 · 智能应答 · 多语言翻译
           </p>
         </div>
 
-        {/* CTA Button */}
-        <div className="mb-8">
-          <PrimaryButton size="lg" className="animate-pulse-glow">
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-fade-in-up animation-delay-300">
+          <PrimaryButton size="lg" className="animate-pulse-glow min-w-[180px]">
+            <Sparkles className="w-5 h-5 mr-2" />
             免费试用
           </PrimaryButton>
+          <SecondaryButton size="lg" className="min-w-[180px]">
+            了解更多
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </SecondaryButton>
         </div>
 
-        {/* User count */}
-        <div className="flex items-center justify-center gap-2 text-[#AAB0C0]">
-          <Users className="w-5 h-5" />
-          <span className="text-sm">
-            面试助手用户数 / <span className="text-[#EDEFF7] font-semibold">758,399</span>
-          </span>
+        {/* Stats row */}
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 animate-fade-in-up animation-delay-400">
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Users className="w-5 h-5 text-[#00D4FF]" />
+              <span className="text-2xl md:text-3xl font-bold text-[#F0F4FF]">758,399</span>
+            </div>
+            <span className="text-sm text-[#94A3C8]">活跃用户</span>
+          </div>
+          <div className="w-px h-10 bg-[#00D4FF]/20 hidden md:block" />
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Target className="w-5 h-5 text-[#00FF88]" />
+              <span className="text-2xl md:text-3xl font-bold text-[#F0F4FF]">92%</span>
+            </div>
+            <span className="text-sm text-[#94A3C8]">面试成功率</span>
+          </div>
+          <div className="w-px h-10 bg-[#00D4FF]/20 hidden md:block" />
+          <div className="text-center">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Globe className="w-5 h-5 text-[#0066FF]" />
+              <span className="text-2xl md:text-3xl font-bold text-[#F0F4FF]">8+</span>
+            </div>
+            <span className="text-sm text-[#94A3C8]">支持语言</span>
+          </div>
         </div>
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#030712] to-transparent" />
     </section>
   );
 }
@@ -88,7 +120,7 @@ function AIInterviewSection() {
     <Section withGradient="left" className="pt-10">
       <SectionHeader
         title="最懂面试的AI助手"
-        subtitle="无论你参加任何行业的面试，我们的AI都能为你提供最高效的面试辅导"
+        subtitle="无论你参加任何行业的面试，智谈AI都能为你提供最高效的面试辅导"
       />
 
       {/* Tabs */}
@@ -101,33 +133,39 @@ function AIInterviewSection() {
         {/* Left: Interviewer Card */}
         <GlassCard className="gradient-border">
           <div className="text-center mb-6">
-            <div className="inline-block p-1 rounded-full bg-gradient-to-br from-[#6366F1] to-[#8B5CF6] mb-4">
+            <div className="inline-block p-1 rounded-full bg-gradient-to-br from-[#00D4FF] to-[#0066FF] mb-4">
               <AvatarPlaceholder size="lg" withBorder={false} />
             </div>
-            <h3 className="text-lg font-semibold text-[#EDEFF7] mb-1">Interviewer</h3>
-            <p className="text-sm text-[#AAB0C0]">面试官</p>
+            <h3 className="text-lg font-semibold text-[#F0F4FF] mb-1">Interviewer</h3>
+            <p className="text-sm text-[#94A3C8]">面试官</p>
           </div>
 
           <div className="space-y-4 mb-6">
             <div className="flex items-start gap-3">
-              <Zap className="w-5 h-5 text-[#6366F1] mt-0.5 flex-shrink-0" />
+              <div className="w-8 h-8 rounded-lg bg-[#00D4FF]/10 flex items-center justify-center flex-shrink-0">
+                <Zap className="w-4 h-4 text-[#00D4FF]" />
+              </div>
               <div>
-                <h4 className="text-sm font-medium text-[#EDEFF7]">快速响应</h4>
-                <p className="text-xs text-[#AAB0C0]">即时回答，智能即时</p>
+                <h4 className="text-sm font-medium text-[#F0F4FF]">快速响应</h4>
+                <p className="text-xs text-[#94A3C8]">即时回答，智能即时</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Zap className="w-5 h-5 text-[#6366F1] mt-0.5 flex-shrink-0" />
+              <div className="w-8 h-8 rounded-lg bg-[#0066FF]/10 flex items-center justify-center flex-shrink-0">
+                <Mic className="w-4 h-4 text-[#0066FF]" />
+              </div>
               <div>
-                <h4 className="text-sm font-medium text-[#EDEFF7]">零延迟</h4>
-                <p className="text-xs text-[#AAB0C0]">每一次提问几乎0延迟的转化</p>
+                <h4 className="text-sm font-medium text-[#F0F4FF]">零延迟</h4>
+                <p className="text-xs text-[#94A3C8]">每一次提问几乎0延迟的转化</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <Zap className="w-5 h-5 text-[#6366F1] mt-0.5 flex-shrink-0" />
+              <div className="w-8 h-8 rounded-lg bg-[#00FF88]/10 flex items-center justify-center flex-shrink-0">
+                <Brain className="w-4 h-4 text-[#00FF88]" />
+              </div>
               <div>
-                <h4 className="text-sm font-medium text-[#EDEFF7]">精确解答</h4>
-                <p className="text-xs text-[#AAB0C0]">为你提供最精准的面试答案</p>
+                <h4 className="text-sm font-medium text-[#F0F4FF]">精确解答</h4>
+                <p className="text-xs text-[#94A3C8]">为你提供最精准的面试答案</p>
               </div>
             </div>
           </div>
@@ -139,7 +177,10 @@ function AIInterviewSection() {
 
         {/* Middle: Interview Questions */}
         <GlassCard>
-          <h3 className="text-lg font-semibold text-[#EDEFF7] mb-4">Interview Question</h3>
+          <h3 className="text-lg font-semibold text-[#F0F4FF] mb-4 flex items-center gap-2">
+            <Cpu className="w-5 h-5 text-[#00D4FF]" />
+            Interview Question
+          </h3>
           <div className="space-y-3">
             {[
               { cn: "请介绍一下你自己", en: "Please introduce yourself" },
@@ -147,9 +188,9 @@ function AIInterviewSection() {
               { cn: "你最大的优点和缺点是什么？", en: "What are your strengths and weaknesses?" },
               { cn: "为什么选择我们公司？", en: "Why did you choose our company?" },
             ].map((q, i) => (
-              <div key={i} className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
-                <p className="text-sm text-[#EDEFF7] mb-1">{q.cn}</p>
-                <p className="text-xs text-[#AAB0C0]">{q.en}</p>
+              <div key={i} className="p-3 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/10 hover:border-[#00D4FF]/30 transition-colors">
+                <p className="text-sm text-[#F0F4FF] mb-1">{q.cn}</p>
+                <p className="text-xs text-[#94A3C8]">{q.en}</p>
               </div>
             ))}
           </div>
@@ -157,26 +198,29 @@ function AIInterviewSection() {
 
         {/* Right: AI Answer */}
         <GlassCard>
-          <h3 className="text-lg font-semibold text-[#EDEFF7] mb-4">AI Answer</h3>
-          <div className="space-y-4 text-sm text-[#AAB0C0] leading-relaxed">
+          <h3 className="text-lg font-semibold text-[#F0F4FF] mb-4 flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-[#00FF88]" />
+            AI Answer
+          </h3>
+          <div className="space-y-4 text-sm text-[#94A3C8] leading-relaxed">
             <p>
-              <span className="text-[#6366F1] font-medium">1.</span>{" "}
+              <span className="text-[#00D4FF] font-medium">1.</span>{" "}
               我是一名有3年经验的产品经理，专注于B2B SaaS产品。
-              <span className="block text-xs mt-1 text-[#AAB0C0]/70">
+              <span className="block text-xs mt-1 text-[#94A3C8]/70">
                 I am a product manager with 3 years of experience, focusing on B2B SaaS products.
               </span>
             </p>
             <p>
-              <span className="text-[#6366F1] font-medium">2.</span>{" "}
+              <span className="text-[#00D4FF] font-medium">2.</span>{" "}
               我具备出色的跨部门沟通能力，曾成功推动多个复杂项目落地。
-              <span className="block text-xs mt-1 text-[#AAB0C0]/70">
+              <span className="block text-xs mt-1 text-[#94A3C8]/70">
                 I have excellent cross-department communication skills.
               </span>
             </p>
             <p>
-              <span className="text-[#6366F1] font-medium">3.</span>{" "}
+              <span className="text-[#00D4FF] font-medium">3.</span>{" "}
               我希望在贵公司发挥我的产品思维，创造更大的用户价值。
-              <span className="block text-xs mt-1 text-[#AAB0C0]/70">
+              <span className="block text-xs mt-1 text-[#94A3C8]/70">
                 I hope to apply my product thinking at your company.
               </span>
             </p>
@@ -225,12 +269,15 @@ function AICodingSection() {
         <div className="space-y-6">
           {/* Question */}
           <GlassCard>
-            <h3 className="text-lg font-semibold text-[#EDEFF7] mb-4">Written Test Question</h3>
-            <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-              <p className="text-sm text-[#EDEFF7] mb-2">
+            <h3 className="text-lg font-semibold text-[#F0F4FF] mb-4 flex items-center gap-2">
+              <Cpu className="w-5 h-5 text-[#00D4FF]" />
+              Written Test Question
+            </h3>
+            <div className="p-4 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/10">
+              <p className="text-sm text-[#F0F4FF] mb-2">
                 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。
               </p>
-              <p className="text-xs text-[#AAB0C0]">
+              <p className="text-xs text-[#94A3C8]">
                 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
               </p>
             </div>
@@ -238,20 +285,23 @@ function AICodingSection() {
 
           {/* AI Answer */}
           <GlassCard>
-            <h3 className="text-lg font-semibold text-[#EDEFF7] mb-4">AI Answer</h3>
+            <h3 className="text-lg font-semibold text-[#F0F4FF] mb-4 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#00FF88]" />
+              AI Answer
+            </h3>
             <div className="space-y-4">
               <div className="flex items-center gap-4 text-sm">
-                <span className="text-[#AAB0C0]">时间复杂度:</span>
-                <span className="text-[#6366F1] font-mono">O(n)</span>
+                <span className="text-[#94A3C8]">时间复杂度:</span>
+                <span className="text-[#00D4FF] font-mono">O(n)</span>
               </div>
               <div className="flex items-center gap-4 text-sm">
-                <span className="text-[#AAB0C0]">空间复杂度:</span>
-                <span className="text-[#6366F1] font-mono">O(n)</span>
+                <span className="text-[#94A3C8]">空间复杂度:</span>
+                <span className="text-[#00D4FF] font-mono">O(n)</span>
               </div>
 
               {/* Code block */}
               <div className="code-block">
-                <pre className="text-sm text-[#AAB0C0]">
+                <pre className="text-sm text-[#94A3C8]">
 {`def twoSum(nums, target):
     hashmap = {}
     for i, num in enumerate(nums):
@@ -282,12 +332,14 @@ function PlatformSection() {
     <Section className="py-12">
       <GlassCard className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
         <div className="flex items-center gap-3 flex-shrink-0">
-          <Globe className="w-6 h-6 text-[#6366F1]" />
-          <span className="text-lg font-semibold text-[#EDEFF7]">广泛支持</span>
+          <div className="w-10 h-10 rounded-xl bg-[#00D4FF]/10 flex items-center justify-center">
+            <Globe className="w-5 h-5 text-[#00D4FF]" />
+          </div>
+          <span className="text-lg font-semibold text-[#F0F4FF]">广泛支持</span>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
           {platforms.map((platform) => (
-            <span key={platform} className="text-sm text-[#AAB0C0] hover:text-[#EDEFF7] transition-colors">
+            <span key={platform} className="text-sm text-[#94A3C8] hover:text-[#00D4FF] transition-colors cursor-default">
               {platform}
             </span>
           ))}
@@ -311,17 +363,17 @@ function TranslationSection() {
         {/* Left side */}
         <div>
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-[#6366F1]/20 flex items-center justify-center">
-              <Globe className="w-7 h-7 text-[#6366F1]" />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00D4FF]/20 to-[#0066FF]/20 border border-[#00D4FF]/30 flex items-center justify-center">
+              <Globe className="w-7 h-7 text-[#00D4FF]" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#EDEFF7]">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#F0F4FF]">
               多语言实时翻译
             </h2>
           </div>
-          <p className="text-[#AAB0C0] mb-4 leading-relaxed">
+          <p className="text-[#94A3C8] mb-4 leading-relaxed">
             支持全球主流语言的实时翻译，让语言不再是面试的障碍
           </p>
-          <p className="text-[#AAB0C0] mb-8 leading-relaxed">
+          <p className="text-[#94A3C8] mb-8 leading-relaxed">
             无论是跨国企业面试还是海外求职，我们都能为你提供专业的语言支持
           </p>
 
@@ -331,17 +383,17 @@ function TranslationSection() {
 
         {/* Right side - Language grid */}
         <GlassCard>
-          <h3 className="text-lg font-semibold text-[#EDEFF7] mb-6">选择语言</h3>
+          <h3 className="text-lg font-semibold text-[#F0F4FF] mb-6">选择语言</h3>
           <div className="grid grid-cols-3 gap-3">
             {languages.map((lang) => (
               <button
                 key={lang}
-                className="px-4 py-3 rounded-xl text-sm font-medium text-[#AAB0C0] bg-white/[0.03] border border-white/5 hover:border-[#6366F1]/50 hover:text-[#EDEFF7] transition-all duration-200"
+                className="px-4 py-3 rounded-xl text-sm font-medium text-[#94A3C8] bg-[#0066FF]/5 border border-[#00D4FF]/10 hover:border-[#00D4FF]/40 hover:text-[#00D4FF] hover:bg-[#00D4FF]/10 transition-all duration-200"
               >
                 {lang}
               </button>
             ))}
-            <button className="px-4 py-3 rounded-xl text-sm font-medium text-[#6366F1] bg-[#6366F1]/10 border border-[#6366F1]/30 hover:bg-[#6366F1]/20 transition-all duration-200">
+            <button className="px-4 py-3 rounded-xl text-sm font-medium text-[#00D4FF] bg-[#00D4FF]/10 border border-[#00D4FF]/30 hover:bg-[#00D4FF]/20 transition-all duration-200">
               MORE...
             </button>
           </div>
@@ -370,18 +422,18 @@ function ResumeSection() {
             <div className="absolute top-4 left-4 right-4 h-full rounded-2xl glass opacity-40 transform rotate-2" />
             <div className="absolute top-2 left-2 right-2 h-full rounded-2xl glass opacity-60 transform -rotate-1" />
             <GlassCard className="relative">
-              <div className="flex items-center gap-3 mb-4 pb-4 border-b border-white/5">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366F1] to-[#8B5CF6]" />
+              <div className="flex items-center gap-3 mb-4 pb-4 border-b border-[#00D4FF]/10">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00D4FF] to-[#0066FF]" />
                 <div>
-                  <p className="text-sm font-medium text-[#EDEFF7]">个人简历</p>
-                  <p className="text-xs text-[#AAB0C0]">Resume.pdf</p>
+                  <p className="text-sm font-medium text-[#F0F4FF]">个人简历</p>
+                  <p className="text-xs text-[#94A3C8]">Resume.pdf</p>
                 </div>
               </div>
               <div className="space-y-3">
-                <div className="h-3 bg-white/5 rounded w-3/4" />
-                <div className="h-3 bg-white/5 rounded w-full" />
-                <div className="h-3 bg-white/5 rounded w-5/6" />
-                <div className="h-3 bg-white/5 rounded w-2/3" />
+                <div className="h-3 bg-[#00D4FF]/10 rounded w-3/4" />
+                <div className="h-3 bg-[#0066FF]/10 rounded w-full" />
+                <div className="h-3 bg-[#00D4FF]/10 rounded w-5/6" />
+                <div className="h-3 bg-[#0066FF]/10 rounded w-2/3" />
               </div>
             </GlassCard>
           </div>
@@ -389,41 +441,41 @@ function ResumeSection() {
 
         {/* Right: Upload UI */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#EDEFF7] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#F0F4FF] mb-4">
             结合简历的个性化回答
           </h2>
-          <p className="text-[#AAB0C0] mb-8 leading-relaxed">
+          <p className="text-[#94A3C8] mb-8 leading-relaxed">
             上传你的简历，AI将根据你的背景和经历，生成最贴合你个人情况的面试回答
           </p>
 
           <GlassCard>
             {/* Upload area */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-[#EDEFF7] mb-3">上传简历</label>
-              <div className="border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-[#6366F1]/50 transition-colors cursor-pointer">
-                <Upload className="w-10 h-10 text-[#AAB0C0] mx-auto mb-3" />
-                <p className="text-sm text-[#EDEFF7] mb-1">点击或拖拽文件上传</p>
-                <p className="text-xs text-[#AAB0C0]">支持 PDF / DOC / DOCX</p>
+              <label className="block text-sm font-medium text-[#F0F4FF] mb-3">上传简历</label>
+              <div className="border-2 border-dashed border-[#00D4FF]/20 rounded-xl p-8 text-center hover:border-[#00D4FF]/40 hover:bg-[#00D4FF]/5 transition-all duration-300 cursor-pointer">
+                <Upload className="w-10 h-10 text-[#00D4FF] mx-auto mb-3" />
+                <p className="text-sm text-[#F0F4FF] mb-1">点击或拖拽文件上传</p>
+                <p className="text-xs text-[#94A3C8]">支持 PDF / DOC / DOCX</p>
               </div>
             </div>
 
             {/* Position selector */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-[#EDEFF7] mb-3">选择岗位</label>
+              <label className="block text-sm font-medium text-[#F0F4FF] mb-3">选择岗位</label>
               <div className="relative">
-                <select className="w-full h-12 px-4 rounded-xl bg-white/[0.03] border border-white/10 text-[#EDEFF7] appearance-none cursor-pointer focus:outline-none focus:border-[#6366F1]/50">
+                <select className="w-full h-12 px-4 rounded-xl bg-[#0066FF]/5 border border-[#00D4FF]/20 text-[#F0F4FF] appearance-none cursor-pointer focus:outline-none focus:border-[#00D4FF]/50 transition-colors">
                   <option value="">请选择目标岗位</option>
                   {positions.map((pos) => (
                     <option key={pos} value={pos}>{pos}</option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#AAB0C0] pointer-events-none" />
+                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3C8] pointer-events-none" />
               </div>
             </div>
 
             {/* Privacy note */}
-            <p className="text-xs text-[#AAB0C0] flex items-start gap-2">
-              <Shield className="w-4 h-4 flex-shrink-0 mt-0.5" />
+            <p className="text-xs text-[#94A3C8] flex items-start gap-2">
+              <Shield className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#00FF88]" />
               您的简历信息将被严格保密，仅用于生成个性化面试回答
             </p>
           </GlassCard>
@@ -447,23 +499,23 @@ function ScreenShareSection() {
       {/* Comparison images */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div>
-          <p className="text-sm text-[#AAB0C0] mb-4 text-center">面试者视角</p>
+          <p className="text-sm text-[#94A3C8] mb-4 text-center">面试者视角</p>
           <ScreenshotPlaceholder title="您的屏幕 - 显示AI助手" />
         </div>
         <div>
-          <p className="text-sm text-[#AAB0C0] mb-4 text-center">面试官共享屏幕视角</p>
+          <p className="text-sm text-[#94A3C8] mb-4 text-center">面试官共享屏幕视角</p>
           <ScreenshotPlaceholder title="面试官看到的 - 正常桌面" />
         </div>
       </div>
 
       {/* Safety banner */}
       <GlassCard className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-        <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
-          <Shield className="w-6 h-6 text-green-400" />
+        <div className="w-12 h-12 rounded-xl bg-[#00FF88]/20 flex items-center justify-center flex-shrink-0">
+          <Shield className="w-6 h-6 text-[#00FF88]" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-[#EDEFF7] mb-1">反检测 - 可担保的隐私安全</h3>
-          <p className="text-sm text-[#AAB0C0]">
+          <h3 className="text-lg font-semibold text-[#F0F4FF] mb-1">反检测 - 可担保的隐私安全</h3>
+          <p className="text-sm text-[#94A3C8]">
             采用先进的窗口隐藏技术，确保在任何屏幕共享场景下都不会被检测到
           </p>
         </div>
@@ -492,7 +544,7 @@ function CompanyLogosSection() {
         {companies.map((company) => (
           <div
             key={company}
-            className="px-6 py-3 rounded-xl glass-card text-[#AAB0C0] hover:text-[#EDEFF7] hover:border-[#6366F1]/30 transition-all duration-200 cursor-default"
+            className="px-6 py-3 rounded-xl glass-card text-[#94A3C8] hover:text-[#00D4FF] hover:border-[#00D4FF]/30 transition-all duration-200 cursor-default"
           >
             {company}
           </div>
@@ -509,7 +561,7 @@ function TestimonialsSection() {
   const testimonials = [
     {
       tag: "Associate",
-      quote: "用了智语面试之后，我的面试通过率从30%提升到了80%，真的太神奇了！",
+      quote: "用了智谈AI之后，我的面试通过率从30%提升到了80%，真的太神奇了！",
       name: "张明",
       role: "软件工程师 @ Google",
       color: "primary" as const,
@@ -530,7 +582,7 @@ function TestimonialsSection() {
     },
     {
       tag: "咨询",
-      quote: "作为咨询行业的求职者，智语面试帮我准备了大量的case interview回答。",
+      quote: "作为咨询行业的求职者，智谈AI帮我准备了大量的case interview回答。",
       name: "赵伟",
       role: "咨询顾问 @ McKinsey",
       color: "primary" as const,
@@ -547,17 +599,17 @@ function TestimonialsSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {testimonials.map((t, i) => (
           <GlassCardGradientTop key={i} hover accentColor={t.color}>
-            <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-[#6366F1]/20 text-[#6366F1] mb-4">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-[#00D4FF]/15 text-[#00D4FF] mb-4">
               {t.tag}
             </span>
-            <p className="text-sm text-[#AAB0C0] leading-relaxed mb-6 min-h-[80px]">
+            <p className="text-sm text-[#94A3C8] leading-relaxed mb-6 min-h-[80px]">
               &ldquo;{t.quote}&rdquo;
             </p>
             <div className="flex items-center gap-3">
               <AvatarPlaceholder size="sm" />
               <div>
-                <p className="text-sm font-medium text-[#EDEFF7]">{t.name}</p>
-                <p className="text-xs text-[#AAB0C0]">{t.role}</p>
+                <p className="text-sm font-medium text-[#F0F4FF]">{t.name}</p>
+                <p className="text-xs text-[#94A3C8]">{t.role}</p>
               </div>
             </div>
           </GlassCardGradientTop>
@@ -574,11 +626,11 @@ function FAQSection() {
   const faqItems = [
     {
       question: "哪些场景可以用？",
-      answer: "智语面试适用于各类面试场景，包括但不限于：技术面试、产品面试、HR面试、群面、在线笔试等。无论是腾讯会议、Zoom、飞书还是其他主流会议软件，我们都能完美支持。",
+      answer: "智谈AI适用于各类面试场景，包括但不限于：技术面试、产品面试、HR面试、群面、在线笔试等。无论是腾讯会议、Zoom、飞书还是其他主流会议软件，我们都能完美支持。",
     },
     {
       question: "运行系统的要求是什么？手机能用吗？",
-      answer: "目前智语面试支持 macOS 10.15+ 和 Windows 10+ 系统。我们的客户端需要在电脑上运行以确保最佳的语音识别和屏幕隐藏效果。暂不支持手机端，但我们正在开发移动版本。",
+      answer: "目前智谈AI支持 macOS 10.15+ 和 Windows 10+ 系统。我们的客户端需要在电脑上运行以确保最佳的语音识别和屏幕隐藏效果。暂不支持手机端，但我们正在开发移动版本。",
     },
     {
       question: "怎么收费？",
@@ -605,6 +657,39 @@ function FAQSection() {
 }
 
 // ========================
+// Section K: CTA
+// ========================
+function CTASection() {
+  return (
+    <Section className="py-24">
+      <div className="relative overflow-hidden rounded-3xl glass-card p-12 md:p-16 text-center">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00D4FF]/10 via-transparent to-[#0066FF]/10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#00D4FF]/20 rounded-full blur-3xl" />
+        
+        <div className="relative z-10">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#F0F4FF] mb-4">
+            准备好提升你的面试表现了吗？
+          </h2>
+          <p className="text-lg text-[#94A3C8] mb-8 max-w-2xl mx-auto">
+            立即开始使用智谈AI，让每一次面试都成为展示你最佳状态的机会
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <PrimaryButton size="lg" className="animate-pulse-glow min-w-[200px]">
+              <Sparkles className="w-5 h-5 mr-2" />
+              免费开始
+            </PrimaryButton>
+            <SecondaryButton size="lg" className="min-w-[200px]">
+              查看定价
+            </SecondaryButton>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+// ========================
 // Main Page Component
 // ========================
 export default function Home() {
@@ -620,6 +705,7 @@ export default function Home() {
       <CompanyLogosSection />
       <TestimonialsSection />
       <FAQSection />
+      <CTASection />
     </>
   );
 }

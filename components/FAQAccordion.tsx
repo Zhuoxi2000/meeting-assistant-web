@@ -27,10 +27,10 @@ export default function FAQAccordion({ items, className }: FAQAccordionProps) {
           value={`item-${index}`}
           className="glass-card rounded-2xl border-0 px-6 overflow-hidden"
         >
-          <AccordionTrigger className="py-5 text-left text-[#EDEFF7] hover:text-[#EDEFF7] hover:no-underline [&[data-state=open]>svg]:rotate-45 [&>svg]:transition-transform [&>svg]:duration-200">
+          <AccordionTrigger className="py-5 text-left text-[#F0F4FF] hover:text-[#00D4FF] hover:no-underline [&[data-state=open]>svg]:rotate-45 [&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:text-[#00D4FF]">
             <span className="text-base font-medium pr-4">{item.question}</span>
           </AccordionTrigger>
-          <AccordionContent className="pb-5 text-[#AAB0C0] leading-relaxed">
+          <AccordionContent className="pb-5 text-[#94A3C8] leading-relaxed">
             {item.answer}
           </AccordionContent>
         </AccordionItem>
@@ -38,4 +38,3 @@ export default function FAQAccordion({ items, className }: FAQAccordionProps) {
     </Accordion>
   );
 }
-
